@@ -29,8 +29,8 @@ import { createPageUrl } from "@/utils";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Watermark from '../components/Watermark';
-import { processSessionRewards } from '../components/GamificationHelper';
+import Watermark from '@components/Watermark';
+import { processSessionRewards } from '@/components/GamificationHelper';
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
 

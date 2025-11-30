@@ -17,7 +17,7 @@ export default function ComparativeBenchmark({ userStats, daysUntilExam }) {
   const volumeComparison = userStats.totalQuestions >= benchmarks.questionsAttempted ? 'above' : 'below';
 
   return (
-    <Card className="mb-8 border-none shadow-xl bg-gradient-to-br from-blue-50 to-purple-50">
+    <Card className="mb-8 border-none shadow-xl bg-linear-to-br from-blue-50 to-purple-50">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Target className="w-6 h-6 text-blue-600" />

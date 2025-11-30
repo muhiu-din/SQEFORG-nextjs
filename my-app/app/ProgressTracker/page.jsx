@@ -22,9 +22,9 @@ import {
 import { format, parseISO, subDays, subMonths, isAfter, isBefore } from 'date-fns';
 import Link from 'next/link';
 import { createPageUrl } from '@/utils';
-import Watermark from '../components/Watermark';
+import Watermark from '@/components/Watermark';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import ComparativeBenchmark from '../components/ComparativeBenchmark';
+import ComparativeBenchmark from '@/components/ComparativeBenchmark';
 import next from 'next';
 
 const CHART_COLORS = {

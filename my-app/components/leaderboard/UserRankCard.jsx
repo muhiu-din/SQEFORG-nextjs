@@ -18,10 +18,10 @@ const UserRankCard = ({ rank, name, averageScore, attemptsCount, points, level, 
 
     if (type === 'accuracy') {
         return (
-            <Card className="mb-8 border-none shadow-lg bg-gradient-to-r from-slate-800 to-slate-900 text-white">
-                <CardContent className="p-6 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                        <div className="flex-shrink-0">
+            <Card className="mb-8 border-none shadow-lg bg-linear-to-r from-slate-800 to-slate-900 text-white">
+                <CardContent className="p-6 items-center justify-between">
+                    <div className="items-center gap-4">
+                        <div className="shrink-0">
                             <p className="text-xs text-amber-300 uppercase font-bold tracking-wider">Your Rank</p>
                             <p className="text-5xl font-bold">#{rank + 1}</p>
                         </div>
@@ -31,12 +31,12 @@ const UserRankCard = ({ rank, name, averageScore, attemptsCount, points, level, 
                         </div>
                     </div>
                     <div className="text-right">
-                        <div className="flex items-center gap-2 justify-end">
+                        <div className="items-center gap-2 justify-end">
                             <Trophy className="w-4 h-4 text-amber-300" />
                             <p className="text-2xl font-bold">{averageScore.toFixed(1)}%</p>
                         </div>
                         <p className="text-xs text-slate-400">Average Score</p>
-                        <div className="flex items-center gap-2 justify-end mt-2">
+                        <div className="items-center gap-2 justify-end mt-2">
                             <BarChart3 className="w-4 h-4 text-slate-400" />
                             <p className="font-semibold">{attemptsCount}</p>
                             <p className="text-xs text-slate-400">Exams Taken</p>
@@ -49,10 +49,10 @@ const UserRankCard = ({ rank, name, averageScore, attemptsCount, points, level, 
 
     // Points type
     return (
-        <Card className="mb-8 border-none shadow-lg bg-gradient-to-r from-purple-600 to-purple-700 text-white">
-            <CardContent className="p-6 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0">
+        <Card className="mb-8 border-none shadow-lg bg-linear-to-r from-purple-600 to-purple-700 text-white">
+            <CardContent className="p-6 items-center justify-between">
+                <div className="items-center gap-4">
+                    <div className="shrink-0">
                         <p className="text-xs text-purple-200 uppercase font-bold tracking-wider">Your Rank</p>
                         <p className="text-5xl font-bold">#{rank + 1}</p>
                     </div>
@@ -62,7 +62,7 @@ const UserRankCard = ({ rank, name, averageScore, attemptsCount, points, level, 
                     </div>
                 </div>
                 <div className="text-right">
-                    <div className="flex items-center gap-2 justify-end">
+                    <div className="items-center gap-2 justify-end">
                         <Target className="w-5 h-5 text-amber-300" />
                         <p className="text-3xl font-bold">{points?.toLocaleString() || 0}</p>
                     </div>

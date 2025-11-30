@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Scale, Target, TrendingUp, Info } from 'lucide-react';
-import ScoreVisualization from '../components/ScoreVisualization';
+import ScoreVisualization from '@/components/ScoreVisualization';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { createPageUrl } from '@/utils';

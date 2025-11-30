@@ -8,8 +8,8 @@ import { Trophy, Flame, Target, TrendingUp, Loader2, Crown, Medal, Award, Zap, U
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { BADGES_CATALOG } from '../components/GamificationWidget';
-import Watermark from '../components/Watermark';
+import { BADGES_CATALOG } from '@/components/GamificationWidget';
+import Watermark from '@/components/Watermark';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const RANK_ICONS = {

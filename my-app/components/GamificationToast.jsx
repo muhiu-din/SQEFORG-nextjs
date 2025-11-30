@@ -29,10 +29,10 @@ export default function GamificationToast({ points, newBadges = [], streakInfo }
                 exit={{ opacity: 0, y: 50, scale: 0.9 }}
                 className="fixed bottom-6 right-6 z-50 max-w-md"
             >
-                <Card className="border-none shadow-2xl bg-gradient-to-br from-purple-600 to-blue-600 text-white">
+                <Card className="border-none shadow-2xl bg-linear-to-br from-purple-600 to-blue-600 text-white">
                     <CardContent className="p-6">
                         <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shrink-0">
                                 <Trophy className="w-6 h-6 text-amber-300" />
                             </div>
                             <div className="flex-1">

@@ -122,7 +122,7 @@ export default function GamificationWidget({ user, compact = false }) {
 
     if (compact) {
         return (
-            <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-200">
+            <div className="flex items-center gap-4 p-4 bg-linear-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-200">
                 <div className="flex items-center gap-2">
                     <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold">
                         {level}
@@ -148,7 +148,7 @@ export default function GamificationWidget({ user, compact = false }) {
     }
 
     return (
-        <Card className="border-none shadow-lg bg-gradient-to-br from-purple-50 to-blue-50 mb-8">
+        <Card className="border-none shadow-lg bg-linear-to-br from-purple-50 to-blue-50 mb-8">
             <CardHeader className="border-b border-purple-100">
                 <CardTitle className="flex items-center justify-between">
                     <span className="flex items-center gap-2">
@@ -165,7 +165,7 @@ export default function GamificationWidget({ user, compact = false }) {
                 <div>
                     <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center text-white font-bold text-xl">
+                            <div className="w-12 h-12 rounded-full bg-linear-to-br from-purple-600 to-purple-700 flex items-center justify-center text-white font-bold text-xl">
                                 {level}
                             </div>
                             <div>

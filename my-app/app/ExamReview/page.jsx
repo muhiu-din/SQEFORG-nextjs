@@ -8,8 +8,8 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createPageUrl } from '@/utils';
-import Watermark from '../components/Watermark';
-import ImprovementSuggestions from '../components/ImprovementSuggestions';
+import Watermark from '@/components/Watermark';
+import ImprovementSuggestions from '@/components/ImprovementSuggestions';
 
 export default function ExamReview() {
   const router = useRouter();

@@ -6,7 +6,7 @@ import { CheckCircle2, Trophy, Loader2, ChevronDown, ChevronUp } from 'lucide-re
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from "framer-motion";
-import Watermark from '../components/Watermark';
+import Watermark from '@/components/Watermark';
 import _ from 'lodash';
 
 export default function MasteredQuestions() {

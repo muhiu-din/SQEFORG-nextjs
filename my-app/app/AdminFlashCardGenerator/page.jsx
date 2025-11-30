@@ -10,7 +10,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AICreditsBadge from '../components/AICreditsBadge';
+import AICreditsBadge from '@/components/AICreditsBadge';
 
 const ALL_SUBJECTS = [
   "Business Law & Practice", "Contract Law", "Tort Law", "Dispute Resolution", "Property Practice", "Land Law",

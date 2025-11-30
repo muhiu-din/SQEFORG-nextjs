@@ -56,7 +56,7 @@ export default function SimulatorResults({
   const totalFlagged = Object.keys(part1FlaggedQuestions).length + Object.keys(part2FlaggedQuestions).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 p-6 md:p-10">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-50 p-6 md:p-10">
       <div className="max-w-4xl mx-auto">
         <Card className="border-none shadow-xl mb-8">
           <CardHeader className={`text-center p-10 border-b ${passed ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'}`}>
