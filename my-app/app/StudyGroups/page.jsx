@@ -89,7 +89,7 @@ export default function StudyGroups() {
     const loadData = async () => {
         setLoading(true);
         try {
-            const currentUser = await base44.auth.me();
+            const currentUser = {name: "Admin User", email: "admin@example.com" ,role: "admin"}; // Mock user
             setUser(currentUser);
 
             const allGroups = await base44.entities.StudyGroup.list();

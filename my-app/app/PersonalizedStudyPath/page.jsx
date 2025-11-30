@@ -124,7 +124,7 @@ export default function PersonalisedStudyPath() {
     const loadData = async () => {
       setLoading(true);
       try {
-        const currentUser = await base44.auth.me();
+        const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
         setUser(currentUser);
         setSelectedGoal(currentUser.study_goal || 'pass_exam');
         setSelectedExamType(currentUser.exam_type || 'Both');

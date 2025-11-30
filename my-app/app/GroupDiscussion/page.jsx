@@ -37,7 +37,7 @@ export default function GroupDiscussion() {
         return;
       }
 
-      const currentUser = await base44.auth.me();
+      const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
       setUser(currentUser);
       
       const fetchedGroup = await base44.entities.StudyGroup.get(groupId);

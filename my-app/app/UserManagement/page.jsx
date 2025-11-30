@@ -1,4 +1,4 @@
-
+"use client";
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 //call api entities here
@@ -13,6 +13,7 @@ import EmailAllUsersDialog from '@/components/admin/EmailAllUsersDialog'; // Imp
 
 export default function UserManagement() {
     const queryClient = useQueryClient();
+    
 
     const { data: users, isLoading, error } = useQuery({
         queryKey: ['users'],

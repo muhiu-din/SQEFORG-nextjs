@@ -61,7 +61,7 @@ export default function PerformanceBenchmarks() {
   const loadBenchmarkData = async () => {
     setLoading(true);
     try {
-      const currentUser = await User.me();
+      const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
       setUser(currentUser);
 
       const [allAttempts, allAnswerLogs, allQuestions] = await Promise.all([

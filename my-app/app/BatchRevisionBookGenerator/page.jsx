@@ -48,7 +48,7 @@ export default function BatchRevisionBookGenerator() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const currentUser = await base44.auth.me();
+                const currentUser =  {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user;
                 setUser(currentUser);
                 // Restore state if available
                 const savedState = localStorage.getItem('batchBookGenState');

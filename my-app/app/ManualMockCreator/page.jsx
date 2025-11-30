@@ -60,7 +60,7 @@ export default function ManualMockCreator() {
     useEffect(() => {
         const initialize = async () => {
             try {
-                const currentUser = await base44.auth.me();
+                const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
                 setUser(currentUser);
             } catch (e) {
                 setUser(null);

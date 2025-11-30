@@ -34,7 +34,7 @@ export default function PersonalisedPractice() {
     const loadData = async () => {
       setLoading(true);
       try {
-        const currentUser = await base44.auth.me();
+        const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
         setUser(currentUser);
         await analyzeStudyPattern(currentUser);
       } catch (e) {

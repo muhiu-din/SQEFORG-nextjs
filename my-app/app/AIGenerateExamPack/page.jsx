@@ -93,7 +93,7 @@ export default function AIGenerateExamPack() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const currentUser = await User.me();
+        const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
         setUser(currentUser);
       } catch (e) {
         setUser(null);

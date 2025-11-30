@@ -1,5 +1,7 @@
 "use client";
-import "./globals.css";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import './globals.css';
+const queryClient = new QueryClient();
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -124,7 +126,7 @@ export default function Layout({ children, currentPageName }) {
     const fetchUser = async () => {
       setLoadingUser(true);
       try {
-        const currentUser = await User.me();
+        const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin", subscription_tier: "ultimate"};
         setUser(currentUser);
       } catch (e) {
         setUser(null);
@@ -206,7 +208,7 @@ export default function Layout({ children, currentPageName }) {
           }
         `}</style>
         <div className="min-h-screen flex w-full bg-linear-to-br from-slate-50 via-blue-50/30 to-slate-50">
-          <Sidebar className="border-r border-slate-200 bg-white z-20">
+          <Sidebar className="border-r border-slate-200 w-65 bg-white z-20">
             <SidebarHeader className="border-b border-slate-100 p-6">
               <div className="flex items-center gap-3">
                 <div className="relative w-12 h-12 bg-linear-to-br from-slate-800 via-slate-700 to-blue-900 rounded-xl flex items-center justify-center shadow-lg">
@@ -281,7 +283,7 @@ export default function Layout({ children, currentPageName }) {
             </header>
 
             <div className="flex-1 ml-65 overflow-auto">
-              {children}
+               <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
             </div>
           </main>
         </div>

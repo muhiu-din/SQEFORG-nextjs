@@ -26,7 +26,7 @@ export default function FlashCardReviewBanks() {
     const loadData = async () => {
         setLoading(true);
         try {
-            const currentUser = await base44.auth.me();
+            const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
             setUser(currentUser);
 
             const userReviews = await base44.entities.FlashCardReview.filter(

@@ -138,7 +138,7 @@ export default function MassQuestionGenerator() {
   useEffect(() => {
     const init = async () => {
       try {
-        const currentUser = await base44.auth.me();
+        const currentUser = await{name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
         setUser(currentUser);
         if (currentUser.role === 'admin') {
           await loadExistingCounts();

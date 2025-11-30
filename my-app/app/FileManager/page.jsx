@@ -21,7 +21,7 @@ export default function FileManager() {
     const initialize = async () => {
       setLoading(true);
       try {
-        const currentUser = await User.me();
+        const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
         setUser(currentUser);
         if (currentUser.role === 'admin') {
           await loadFiles();

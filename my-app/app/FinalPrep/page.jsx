@@ -127,7 +127,7 @@ const UpgradePrompt = () => (
                     The 30-Day Final Prep plan is an exclusive feature for our Pro and Ultimate members. It's designed to give you the ultimate edge in the final month before your exam.
                 </p>
                 <Button asChild size="lg" className="w-full bg-slate-900 hover:bg-slate-800">
-                    <Link to={createPageUrl("Packages")}>
+                    <Link href={createPageUrl("Packages")}>
                         <Rocket className="w-5 h-5 mr-2" />
                         Upgrade Now to Access
                     </Link>
@@ -252,7 +252,7 @@ export default function FinalPrep() {
                                                         </div>
                                                         {task.link && (
                                                             <Button asChild variant="outline" size="sm" className="self-start sm:self-center">
-                                                                <Link to={task.link}>Go to Task</Link>
+                                                                <Link href={task.link}>Go to Task</Link>
                                                             </Button>
                                                         )}
                                                     </label>

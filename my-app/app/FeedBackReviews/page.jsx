@@ -93,7 +93,7 @@ export default function FeedbackReviews() {
     ];
 
     useEffect(() => {
-        User.me().then(setUser).catch(() => setUser(null));
+        const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
         fetchReviews();
     }, []);
 

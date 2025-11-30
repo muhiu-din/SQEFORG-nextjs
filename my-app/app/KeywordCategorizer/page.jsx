@@ -40,7 +40,7 @@ export default function KeywordCategorizer() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        setUser(await User.me());
+        setUser({name: "Admin User", email: "admin@example.com", role: "admin"}); // Mock admin user
       } catch (e) {
         setUser(null);
       }

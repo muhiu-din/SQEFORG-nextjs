@@ -48,7 +48,7 @@ export default function BulkBLLGenerator() {
     useEffect(() => {
         const checkForSavedProgress = async () => {
             try {
-                const currentUser = await base44.auth.me();
+                const currentUser =  {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
                 setUser(currentUser);
                 
                 // Check for in-progress generation
@@ -92,7 +92,7 @@ export default function BulkBLLGenerator() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const currentUser = await base44.auth.me();
+                const currentUser =  {name: "Admin User", email: "admin@example.com", role: "admin"};   
                 setUser(currentUser);
             } catch (e) {
                 setUser(null);

@@ -45,7 +45,7 @@ export default function SubjectReviewTool() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const currentUser = await User.me();
+        const currentUser = {name: "Admin User", email: "admin@example.com" ,role: "admin"}; // Mock user
         setUser(currentUser);
       } catch (e) {
         setUser(null);

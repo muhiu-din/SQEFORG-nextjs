@@ -54,7 +54,7 @@ export default function TopicMockGenerator() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const currentUser = await base44.auth.me();
+                const currentUser = {name: "Admin User", email: "admin@example.com" ,role: "admin"}; // Mock user
                 setUser(currentUser);
             } catch (e) {
                 setUser(null);
