@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ShieldQuestion, CheckCircle2, XCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { motion, AnimatePresence } from "framer-motion";
-import Watermark from '../components/Watermark';
+import Watermark from '@/components/Watermark';
 
 export default function ReviewBank() {
   const [wrongQuestions, setWrongQuestions] = useState([]);

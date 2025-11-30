@@ -8,8 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Loader2, Shield, Trash2, User as UserIcon } from 'lucide-react';
 import EditMockDialog from '@/components/admin/EditMockDialog'; // Assuming this is for user edits now
-import AddCreditsDialog from '../components/admin/AddCreditsDialog';
-import EmailAllUsersDialog from '../components/admin/EmailAllUsersDialog'; // Import the new component
+import AddCreditsDialog from '@/components/admin/AddCreditsDialog';
+import EmailAllUsersDialog from '@/components/admin/EmailAllUsersDialog'; // Import the new component
 
 export default function UserManagement() {
     const queryClient = useQueryClient();

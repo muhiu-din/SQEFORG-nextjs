@@ -29,14 +29,14 @@ import Link from "next/link";
 import { createPageUrl } from "@/utils";
 import _ from "lodash";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import MiniMock from "../components/MiniMock";
-import DailyChallenge from "../components/DailyChallenge";
-import ForgerHelper from "../components/ForgerHelper";
-import AccountStatusSummary from "../components/dashboard/AccountStatusSummary";
-import QuickPracticeDialog from "../components/dashboard/QuickPracticeDialog";
-import GamificationWidget from "../components/GamificationWidget";
-import PerformanceWatcher from '../components/PerformanceWatcher'; // NEW IMPORT
-import AICreditBreakdown from '../components/AICreditBreakdown';
+import MiniMock from "@/components/MiniMock";
+import DailyChallenge from "@/components/DailyChallenge";
+import ForgerHelper from "@/components/ForgerHelper";
+import AccountStatusSummary from "@/components/dashboard/AccountStatusSummary";
+import QuickPracticeDialog from "@/components/dashboard/QuickPracticeDialog";
+import GamificationWidget from "@/components/GamificationWidget";
+import PerformanceWatcher from '@/components/PerformanceWatcher'; // NEW IMPORT
+import AICreditBreakdown from '@/components/AICreditBreakdown';
 
 const FLK1_SUBJECTS = [
   "Business Law & Practice", "Contract Law", "Tort Law", "Dispute Resolution",

@@ -19,7 +19,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert"; // Added Alert and AlertDescription import
-import CustomMockDialog from '../components/CustomMockDialog';
+import CustomMockDialog from '@/components/CustomMockDialog';
 import { useToast } from "@/components/ui/use-toast";
 
 export default function MockExams() {

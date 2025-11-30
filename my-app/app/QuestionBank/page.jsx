@@ -20,11 +20,11 @@ import Link from 'next/link';
 import { useSearchParams,useRouter } from "next/navigation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ScoreVisualization from '../components/ScoreVisualization';
-import Watermark from '../components/Watermark';
-import ImprovementSuggestions from '../components/ImprovementSuggestions';
-import { processSessionRewards } from '../components/GamificationHelper';
-import GamificationToast from '../components/GamificationToast';
+import ScoreVisualization from '@/components/ScoreVisualization';
+import Watermark from '@/components/Watermark';
+import ImprovementSuggestions from '@/components/ImprovementSuggestions';
+import { processSessionRewards } from '@/components/GamificationHelper';
+import GamificationToast from '@/components/GamificationToast';
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 // CANONICAL SUBJECT LIST - matches Question entity exactly

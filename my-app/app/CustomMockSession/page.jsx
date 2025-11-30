@@ -11,10 +11,10 @@ import { Badge } from '@/components/ui/badge';
 import { Loader2, Clock, Flag, CheckCircle2, XCircle, AlertCircle, ArrowLeft, ArrowRight, Shield } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import Watermark from '../components/Watermark';
-import ScoreVisualization from '../components/ScoreVisualization';
-import { processSessionRewards } from '../components/GamificationHelper';
-import GamificationToast from '../components/GamificationToast';
+import Watermark from '@/components/Watermark';
+import ScoreVisualization from '@/components/ScoreVisualization';
+import { processSessionRewards } from '@/components/GamificationHelper';
+import GamificationToast from '@/components/GamificationToast';
 import {
   Accordion,
   AccordionContent,

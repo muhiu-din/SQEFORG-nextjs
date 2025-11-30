@@ -20,7 +20,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import AICreditsBadge from '../components/AICreditsBadge';
+import AICreditsBadge from '@/components/AICreditsBadge';
 
 const ALL_SUBJECTS = [
   "Business Law & Practice", "Contract Law", "Tort Law", "Dispute Resolution", "Property Practice", "Land Law",

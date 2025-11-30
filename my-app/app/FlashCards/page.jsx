@@ -16,8 +16,8 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { format } from 'date-fns';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { processFlashcardRewards } from '../components/GamificationHelper';
-import GamificationToast from '../components/GamificationToast';
+import { processFlashcardRewards } from '@/components/GamificationHelper';
+import GamificationToast from '@/components/GamificationToast';
 
 const ALL_SUBJECTS = [
   "Business Law & Practice", "Contract Law", "Tort Law", "Dispute Resolution",

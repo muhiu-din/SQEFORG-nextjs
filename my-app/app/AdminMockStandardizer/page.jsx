@@ -19,7 +19,7 @@ import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from "@/components/ui/use-toast";
-import EditMockDialog from '../components/admin/EditMockDialog';
+import EditMockDialog from '@/components/admin/EditMockDialog';
 import _ from 'lodash';
 
 const TARGET_QUESTION_COUNT = 90;
