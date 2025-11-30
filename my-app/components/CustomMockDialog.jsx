@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { base44 } from "@/api/base44Client";
+//call api entities here
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Loader2, Sparkles, Play, Shield, Lock } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -26,7 +26,7 @@ const FLK1_SUBJECTS = ["Business Law & Practice", "Contract Law", "Tort Law", "D
 const FLK2_SUBJECTS = ["Property Practice", "Land Law", "Wills & Administration of Estates", "Trusts", "Criminal Law", "Criminal Practice", "Solicitors Accounts", "Ethics & Professional Conduct"];
 
 export default function CustomMockDialog({ trigger }) {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -132,7 +132,7 @@ export default function CustomMockDialog({ trigger }) {
       });
 
       setOpen(false);
-      navigate(createPageUrl("TakeExam") + `?examId=${mockExam.id}`);
+      router.push(createPageUrl("TakeExam") + `?examId=${mockExam.id}`);
     } catch (error) {
       console.error("Failed to create mock:", error);
       alert("Failed to create custom mock exam. Please try again.");
@@ -175,7 +175,7 @@ export default function CustomMockDialog({ trigger }) {
       });
 
       setOpen(false);
-      navigate(createPageUrl("TakeExam") + `?examId=${mockExam.id}`);
+      router.push(createPageUrl("TakeExam") + `?examId=${mockExam.id}`);
     } catch (error) {
       console.error("Failed to create mock:", error);
       alert("Failed to create custom mock exam. Please try again.");

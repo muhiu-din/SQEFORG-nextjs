@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { StudyNote, User } from '@/api/entities';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookCopy, Loader2, FileText, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';

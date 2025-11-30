@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { User, Question, MockExam } from "@/api/entities";
-import { InvokeLLM } from "@/api/integrations";
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

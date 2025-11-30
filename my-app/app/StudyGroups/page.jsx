@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+//call api entities here
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createPageUrl } from '@/utils';

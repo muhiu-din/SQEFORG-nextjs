@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { base44 } from "@/api/base44Client";
-import { useLocation, useNavigate } from 'react-router-dom';
+//call api entities here
+import { useRouter,useSearchParams } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -29,8 +29,8 @@ import {
 } from "@/components/ui/tabs";
 
 export default function TakeExam() {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [user, setUser] = useState(null);
   const [mockExam, setMockExam] = useState(null);
   const [questions, setQuestions] = useState([]);
@@ -46,7 +46,7 @@ export default function TakeExam() {
   const [detailedFeedback, setDetailedFeedback] = useState({});
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(searchParams.toString());
     const examId = params.get('examId');
 
     const loadExam = async () => {
@@ -74,7 +74,7 @@ export default function TakeExam() {
     if (examId) {
       loadExam();
     }
-  }, [location.search]);
+  }, [searchParams]);
 
   useEffect(() => {
     if (timeRemaining === null || timeRemaining <= 0 || isFinished) return;
@@ -274,7 +274,7 @@ Format your response as JSON:
           <AlertCircle className="w-12 h-12 text-amber-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold mb-2">Exam Not Found</h2>
           <p className="text-slate-600 mb-6">Unable to load this exam or it contains no questions.</p>
-          <Button onClick={() => navigate(createPageUrl('MockExams'))}>
+          <Button onClick={() => router.push(createPageUrl('MockExams'))}>
             Back to Mock Exams
           </Button>
         </Card>
@@ -565,14 +565,14 @@ Format your response as JSON:
 
                 <div className="flex gap-4">
                   <Button
-                    onClick={() => navigate(createPageUrl('MockExams'))}
+                    onClick={() => router.push(createPageUrl('MockExams'))}
                     variant="outline"
                     className="flex-1"
                   >
                     Back to Mock Exams
                   </Button>
                   <Button
-                    onClick={() => navigate(createPageUrl('PersonalisedPractice'))}
+                    onClick={() => router.push(createPageUrl('PersonalisedPractice'))}
                     className="flex-1 bg-amber-500 hover:bg-amber-600 text-slate-900"
                   >
                     Practice Weak Areas

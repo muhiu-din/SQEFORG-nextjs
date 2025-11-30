@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useCallback, useRef } from 'react';
-import { base44 } from '@/api/base44Client';
+//call api entities here
 
 /**
  * Silent background component that monitors user performance patterns

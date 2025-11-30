@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { MockExam } from '@/api/entities';
+//call api entities here
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
-import { base44 } from '@/api/base44Client';
+//call api entities here
 import _ from 'lodash';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -26,10 +26,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { createPageUrl } from "@/utils";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { useRouter ,useSearchParams} from "next/navigation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Watermark from '@components/Watermark';
+import Watermark from '@/components/Watermark';
 import { processSessionRewards } from '@/components/GamificationHelper';
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
@@ -54,8 +55,8 @@ const ALL_SUBJECTS = [
 ];
 
 export default function BlackLetterLawPractice() {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -218,7 +219,7 @@ export default function BlackLetterLawPractice() {
   }, [loadData]);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(searchParams.toString());
     if (params.get('startSession') === 'true' && questions.length > 0) {
       const config = {
         numQuestions: parseInt(params.get('numQuestions')) || 30,
@@ -230,7 +231,7 @@ export default function BlackLetterLawPractice() {
       setSessionConfig(config);
       setTimeout(() => startSession(config), 500);
     }
-  }, [location.search, questions]);
+  }, [searchParams, questions]);
 
   const startSession = async (config = sessionConfig) => {
     let pool = [...questions];
@@ -404,7 +405,7 @@ export default function BlackLetterLawPractice() {
   const handleSaveAndQuit = async () => {
     // Session is already saved on every step, just exit
     setInSession(false);
-    navigate(createPageUrl('Dashboard'));
+    router.push(createPageUrl('Dashboard'));
   };
 
   const handleAnswerSelect = (optionLetter) => {
@@ -504,7 +505,7 @@ export default function BlackLetterLawPractice() {
   const handleEndSession = () => {
     setInSession(false);
     setCompletedSession(false);
-    navigate(createPageUrl('BlackLetterLawPractice'));
+    router.push(createPageUrl('BlackLetterLawPractice'));
   };
 
   if (loading) {
@@ -523,7 +524,7 @@ export default function BlackLetterLawPractice() {
           <AlertCircle className="w-12 h-12 text-amber-400 mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-2">Subscription Required</h1>
           <p className="text-slate-600 mb-6">Access Black Letter Law Practice with any subscription plan.</p>
-          <Link to={createPageUrl("Packages")}>
+          <Link href={createPageUrl("Packages")}>
             <Button className="bg-amber-400 hover:bg-amber-500 text-slate-900">View Plans</Button>
           </Link>
         </Card>

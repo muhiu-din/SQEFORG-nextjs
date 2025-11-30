@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useMemo } from 'react';
-import { Question, DailyChallengeCompletion, User } from '@/api/entities';
+//call api entities here
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
 import { Loader2, CheckCircle2, XCircle, Trophy, Sparkles } from 'lucide-react';

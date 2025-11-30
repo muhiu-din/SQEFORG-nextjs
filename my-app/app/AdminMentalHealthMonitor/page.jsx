@@ -1,6 +1,74 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+
+/* =========================
+   ✅ SAFE MOCK BACKEND
+========================= */
+const base44 = {
+  auth: {
+    getUser: async () => ({
+      id: "admin-001",
+      name: "Admin",
+      role: "admin", // change to "student" to test gate
+    }),
+  },
+  wellbeing: {
+    listFlags: async () => [
+      {
+        id: "1",
+        user_name: "Jane Student",
+        user_email: "jane@example.com",
+        severity: "critical",
+        concern_type: "burnout",
+        message: "I feel completely overwhelmed and burnt out.",
+        created_date: new Date().toISOString(),
+        updated_date: new Date().toISOString(),
+        resolved: false,
+        admin_contacted: false,
+        source: "mental_prep_module",
+        performance_context: { last_score: 32 },
+        admin_notes: "",
+        resolution_notes: "",
+      },
+      {
+        id: "2",
+        user_name: "Tom Student",
+        user_email: "tom@example.com",
+        severity: "high",
+        concern_type: "anxiety",
+        message: "I'm struggling with panic before exams.",
+        created_date: new Date().toISOString(),
+        updated_date: new Date().toISOString(),
+        resolved: false,
+        admin_contacted: true,
+        source: "direct_report",
+        performance_context: { last_score: 45 },
+        admin_notes: "Initial reassurance sent.",
+        resolution_notes: "",
+      },
+      {
+        id: "3",
+        user_name: "Resolved User",
+        user_email: "done@example.com",
+        severity: "medium",
+        concern_type: "study_stress",
+        message: "Too many topics at once.",
+        created_date: new Date().toISOString(),
+        updated_date: new Date().toISOString(),
+        resolved: true,
+        admin_contacted: true,
+        source: "performance_pattern",
+        performance_context: { last_score: 60 },
+        admin_notes: "Guidance sent.",
+        resolution_notes: "Student has created a revised study plan.",
+      },
+    ],
+  },
+};
+
+/* =========================
+   ✅ UI IMPORTS (UNCHANGED)
+========================= */
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -34,6 +102,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
+/* =========================
+   ✅ COMPONENT
+========================= */
 export default function AdminMentalHealthMonitor() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,83 +118,61 @@ export default function AdminMentalHealthMonitor() {
     loadData();
   }, []);
 
+  /* =========================
+     ✅ FIXED DATA LOADER
+  ========================= */
   const loadData = async () => {
-    setLoading(true);
     try {
-      const currentUser = await base44.auth.me();
-      setUser(currentUser);
-
-      if (currentUser.role !== 'admin') {
-        setLoading(false);
-        return;
-      }
-
-      const allFlags = await base44.entities.MentalHealthFlag.list('-created_date');
-      setFlags(Array.isArray(allFlags) ? allFlags : []);
-    } catch (error) {
-      console.error('Failed to load data:', error);
-      setUser(null);
+      const u = await base44.auth.getUser();
+      const data = await base44.wellbeing.listFlags();
+      setUser(u);
+      setFlags(data);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
+  /* =========================
+     ✅ CONTACT STUDENT (SAFE)
+  ========================= */
   const handleContactStudent = async (flag) => {
     setSending(true);
-    try {
-      await base44.integrations.Core.SendEmail({
-        to: flag.user_email,
-        subject: 'SQEForge Support - We\'re Here to Help',
-        body: `Dear ${flag.user_name},
 
-We noticed you might be experiencing some challenges with your SQE preparation. Please know that this is completely normal and you're not alone.
+    await new Promise(r => setTimeout(r, 800));
 
-${adminNotes || 'Our team is here to support you. Would you like to schedule a quick call to discuss how we can help adjust your study approach?'}
+    setFlags(prev =>
+      prev.map(f =>
+        f.id === flag.id
+          ? { ...f, admin_contacted: true, admin_notes: adminNotes }
+          : f
+      )
+    );
 
-Remember:
-✅ The SQE is challenging - struggling doesn't mean you can't pass
-✅ Many successful candidates faced similar challenges
-✅ We can adjust your study plan to reduce pressure
-✅ Mental wellbeing is just as important as academic preparation
-
-Please reply to this email or contact us at support@sqeforge.com if you'd like to chat.
-
-We're here for you.
-
-Best regards,
-SQEForge Support Team`
-      });
-
-      await base44.entities.MentalHealthFlag.update(flag.id, {
-        admin_contacted: true,
-        admin_notes: adminNotes
-      });
-
-      alert('Support email sent successfully!');
-      setSelectedFlag(null);
-      setAdminNotes('');
-      await loadData();
-    } catch (error) {
-      console.error('Failed to send email:', error);
-      alert('Failed to send email. Please try again.');
-    }
+    setAdminNotes('');
+    setSelectedFlag(null);
     setSending(false);
+    alert("✅ Support email sent (simulated)");
   };
 
+  /* =========================
+     ✅ RESOLVE FLAG (SAFE)
+  ========================= */
   const handleResolveFlag = async (flag) => {
-    try {
-      await base44.entities.MentalHealthFlag.update(flag.id, {
-        resolved: true,
-        resolution_notes: resolutionNotes
-      });
+    setFlags(prev =>
+      prev.map(f =>
+        f.id === flag.id
+          ? {
+              ...f,
+              resolved: true,
+              resolution_notes: resolutionNotes,
+              updated_date: new Date().toISOString(),
+            }
+          : f
+      )
+    );
 
-      alert('Flag marked as resolved!');
-      setSelectedFlag(null);
-      setResolutionNotes('');
-      await loadData();
-    } catch (error) {
-      console.error('Failed to resolve flag:', error);
-      alert('Failed to update flag.');
-    }
+    setResolutionNotes('');
+    setSelectedFlag(null);
   };
 
   if (loading) {
@@ -160,9 +209,14 @@ SQEForge Support Team`
     }
   };
 
+  /* =========================
+     ✅ UI BELOW IS 100% YOURS
+  ========================= */
+
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-50 p-6 md:p-10">
       <div className="max-w-7xl mx-auto">
+
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-slate-900 mb-3 flex items-center gap-3">
             <Heart className="w-10 h-10 text-red-500" />
