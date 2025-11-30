@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { ManualMock } from '@/api/entities';
+import { useSearchParams } from 'next/navigation';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, AlertTriangle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 export default function ViewManualMock() {
-  const location = useLocation();
+  const searchParams = useSearchParams();
   const [mock, setMock] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ export default function ViewManualMock() {
     const fetchMock = async () => {
       setLoading(true);
       setError(null);
-      const params = new URLSearchParams(location.search);
+      const params = new URLSearchParams(searchParams.toString());
       const mockId = params.get('id');
 
       if (!mockId) {
@@ -35,7 +35,7 @@ export default function ViewManualMock() {
       setLoading(false);
     };
     fetchMock();
-  }, [location.search]);
+  }, [searchParams]);
 
   if (loading) {
     return (

@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Question, MockExam } from "@/api/entities";
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { createPageUrl } from "@/utils";
 import { ArrowLeft, Plus, Info } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -18,7 +18,7 @@ const FLK1_SUBJECTS = ["Business Law & Practice", "Dispute Resolution", "Contrac
 const FLK2_SUBJECTS = ["Property Practice", "Wills & Administration of Estates", "Solicitors Accounts", "Land Law", "Trusts", "Criminal Law", "Criminal Practice"];
 
 export default function CreateMockExam() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [timeLimit, setTimeLimit] = useState(153);
@@ -64,7 +64,7 @@ export default function CreateMockExam() {
         time_limit_minutes: timeLimit,
         question_ids: selectedQuestions
       });
-      navigate(createPageUrl("MockExams"));
+      router.push(createPageUrl("MockExams"));
     } catch (err) {
       setError("Failed to create mock exam. Please try again.");
       console.error("Error creating mock exam:", err);
@@ -119,7 +119,7 @@ export default function CreateMockExam() {
           <Button
             variant="outline"
             size="icon"
-            onClick={() => navigate(createPageUrl("MockExams"))}
+            onClick={() => router.push(createPageUrl("MockExams"))}
           >
             <ArrowLeft className="w-4 h-4" />
           </Button>
@@ -221,7 +221,7 @@ export default function CreateMockExam() {
             <Button
               type="button"
               variant="outline"
-              onClick={() => navigate(createPageUrl("MockExams"))}
+              onClick={() => router.push(createPageUrl("MockExams"))}
               className="flex-1 h-12"
             >
               Cancel

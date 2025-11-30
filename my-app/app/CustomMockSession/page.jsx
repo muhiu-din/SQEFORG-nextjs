@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { base44 } from "@/api/base44Client";
+//call api entities here
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createPageUrl } from '@/utils';
@@ -54,7 +54,7 @@ export default function CustomMockSession() {
     const loadData = async () => {
       setLoading(true);
       try {
-        const currentUser = await base44.auth.me();
+        const currentUser =  {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
         setUser(currentUser);
 
         const allQuestions = await base44.entities.Question.list();

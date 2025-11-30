@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { User, Question } from '@/api/entities';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -40,7 +40,7 @@ export default function KeywordCategorizer() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        setUser(await User.me());
+        setUser({name: "Admin User", email: "admin@example.com", role: "admin"}); // Mock admin user
       } catch (e) {
         setUser(null);
       }

@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { StudyNote, User } from '@/api/entities';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookCopy, Loader2, FileText, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -15,7 +14,43 @@ import MiniMock from '@/components/MiniMock';
 import Link from 'next/link';
 import { createPageUrl } from "@/utils";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge"; // Added Badge import
+import { Badge } from "@/components/ui/badge";
+
+// MOCK DATA
+const MOCK_USER = { name: "Admin User", email: "admin@example.com", role: "admin" };
+
+const MOCK_NOTES = [
+  {
+    id: 'note1',
+    subject: 'Contract Law',
+    title: 'Consideration and Promises',
+    content: '### Key Points\n- Consideration is essential for contract validity.\n- Must be something of value.',
+    source_filename: 'contract_notes.pdf',
+    mini_mock_questions: [
+      {
+        id: 'q1',
+        question_text: 'What is consideration in contract law?',
+        options: ['A promise without obligation', 'Something of value exchanged', 'A verbal agreement', 'Only written contracts'],
+        correct_answer: 1
+      }
+    ]
+  },
+  {
+    id: 'note2',
+    subject: 'Tort Law',
+    title: 'Negligence Essentials',
+    content: '### Key Points\n- Duty, breach, causation, damage.\n- Standard of care expected.',
+    source_filename: 'tort_notes.pdf',
+    mini_mock_questions: [
+      {
+        id: 'q2',
+        question_text: 'Which tort requires proving duty, breach, causation, and damage?',
+        options: ['Negligence', 'Battery', 'Defamation', 'Nuisance'],
+        correct_answer: 0
+      }
+    ]
+  }
+];
 
 export default function StudyNotes() {
   const [notesBySubject, setNotesBySubject] = useState({});
@@ -23,44 +58,28 @@ export default function StudyNotes() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const initialize = async () => {
-      try {
-        const currentUser = await User.me();
-        setUser(currentUser);
-      } catch (e) {
-        setUser({ subscription_tier: 'starter' }); // Assume starter if not logged in
-      }
-    };
-    initialize();
+    // Mock user login
+    setUser(MOCK_USER);
   }, []);
 
   useEffect(() => {
     if (user) {
-        const hasAccess = user.role === 'admin' || ['pro', 'ultimate'].includes(user.subscription_tier);
-        if (hasAccess) {
-            loadNotes();
-        } else {
-            setLoading(false);
-        }
+      const hasAccess = user.role === 'admin' || ['pro', 'ultimate'].includes(user.subscription_tier);
+      if (hasAccess) {
+        loadNotes();
+      } else {
+        setLoading(false);
+      }
     }
   }, [user]);
 
   const loadNotes = async () => {
-    const allNotes = await StudyNote.list('-created_date');
-    
-    // Apply tier limits: Starter gets all notes (no limit)
-    let availableNotes = allNotes;
-    if (user?.role !== 'admin') {
-      const tier = user?.subscription_tier || 'starter';
-      // All tiers get full access to notes - no restrictions
-      // This is fair as notes are educational content
-    }
-    
-    const notesMap = _.groupBy(availableNotes, 'subject');
+    // Group mock notes by subject
+    const notesMap = _.groupBy(MOCK_NOTES, 'subject');
     setNotesBySubject(notesMap);
     setLoading(false);
   };
-  
+
   const sortedSubjects = Object.keys(notesBySubject).sort();
 
   if (loading) {

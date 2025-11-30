@@ -1,7 +1,7 @@
-
+"use client";
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { User } from '@/api/entities';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
@@ -13,6 +13,7 @@ import EmailAllUsersDialog from '@/components/admin/EmailAllUsersDialog'; // Imp
 
 export default function UserManagement() {
     const queryClient = useQueryClient();
+    
 
     const { data: users, isLoading, error } = useQuery({
         queryKey: ['users'],

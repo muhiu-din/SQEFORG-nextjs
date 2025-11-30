@@ -1,12 +1,14 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Loader2,Lock as LockIcon,BookOpen ,Sparkles,FileText } from "lucide-react";
+
 
 const FLK1_SUBJECTS = [
     "Business Law & Practice",
@@ -52,7 +54,7 @@ export default function ModularRevisionBookGenerator() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const currentUser = await base44.auth.me();
+                const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
                 setUser(currentUser);
                 
                 // Check for saved progress
@@ -678,7 +680,7 @@ WRITING REQUIREMENTS:
         return (
             <div className="min-h-screen bg-slate-50 flex items-center justify-center p-10">
                 <Card className="max-w-md text-center p-8">
-                    <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
+                    <LockIcon className="w-12 h-12 text-red-500 mx-auto mb-4" />
                     <h1 className="text-2xl font-bold">Admin Only</h1>
                     <p className="text-slate-600 mt-2">This tool is for administrators only.</p>
                     <Link href={createPageUrl("Dashboard")}>

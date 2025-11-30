@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-// import { base44 } from "@/api/base44Client";
+// NOTE: This file ships with a lightweight MOCK `base44` object so the UI runs without a backend.
+// Replace the `base44` mock below with your real client when your colleague implements the backend.
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -38,6 +40,7 @@ import GamificationWidget from "@/components/GamificationWidget";
 import PerformanceWatcher from '@/components/PerformanceWatcher'; // NEW IMPORT
 import AICreditBreakdown from '@/components/AICreditBreakdown';
 
+// --- SUBJECT LISTS ---
 const FLK1_SUBJECTS = [
   "Business Law & Practice", "Contract Law", "Tort Law", "Dispute Resolution",
   "Constitutional & Administrative Law", "EU Law", "The Legal System of England & Wales", "Legal Services"
@@ -47,6 +50,88 @@ const FLK2_SUBJECTS = [
   "Property Practice", "Land Law", "Wills & Administration of Estates", "Trusts",
   "Criminal Law", "Criminal Practice", "Solicitors Accounts", "Ethics & Professional Conduct"
 ];
+
+// -----------------
+// Mock base44 (replace with real client)
+// -----------------
+const mockUser = {
+  full_name: "Student",
+  email: "alex.student@example.com",
+  role: "admin",
+  study_goal: "improve_weak_areas",
+  exam_type: "Both",
+  // set exam dates so countdown examples appear in UI (ISO strings)
+  flk1_exam_date: new Date(Date.now() + 12 * 24 * 60 * 60 * 1000).toISOString(),
+  flk2_exam_date: new Date(Date.now() + 40 * 24 * 60 * 60 * 1000).toISOString()
+};
+
+// create deterministic-ish mock answer logs so subject performance calculations show results
+const makeMockAnswerLogs = () => {
+  const subjects = [...FLK1_SUBJECTS, ...FLK2_SUBJECTS];
+  const logs = [];
+  // Ensure some subjects have >=5 attempts
+  for (let i = 0; i < subjects.length; i++) {
+    const attempts = 5 + (i % 4); // between 5 and 8
+    for (let j = 0; j < attempts; j++) {
+      const correct = ((i + j) % 3) !== 0; // about 2/3 correct for many, but some will be weaker
+      logs.push({
+        created_by: mockUser.email,
+        subject: subjects[i],
+        was_correct: correct,
+        created_date: new Date(Date.now() - (i * 100000 + j * 10000)).toISOString()
+      });
+    }
+  }
+  // Add some extra logs so totalQuestions isn't tiny
+  for (let k = 0; k < 30; k++) {
+    logs.push({
+      created_by: mockUser.email,
+      subject: FLK1_SUBJECTS[k % FLK1_SUBJECTS.length],
+      was_correct: k % 2 === 0,
+      created_date: new Date(Date.now() - k * 20000).toISOString()
+    });
+  }
+  return logs;
+};
+
+const mockAnswerLogs = makeMockAnswerLogs();
+
+const mockExamAttempts = [
+  { created_by: mockUser.email, completed: true, score: 68, total_questions: 90, created_date: new Date().toISOString() },
+  { created_by: mockUser.email, completed: true, score: 74, total_questions: 90, created_date: new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString() },
+  { created_by: mockUser.email, completed: false, score: 0, total_questions: 90, created_date: new Date(Date.now() - 2 * 24 * 3600 * 1000).toISOString() }
+];
+
+const base44 = {
+  // auth mock
+  auth: {
+    isAuthenticated: async () => true,
+    me: async () => mockUser,
+    redirectToLogin: (path) => { window.location.href = '/login?redirect=' + encodeURIComponent(path); }
+  },
+  // entities mock - filter ignores most args and returns relevant mock arrays
+  entities: {
+    UserAnswerLog: {
+      filter: async (filterObj, sort, limit) => {
+        // naive filter by created_by
+        if (filterObj && filterObj.created_by) {
+          return mockAnswerLogs.filter(l => l.created_by === filterObj.created_by).slice(0, limit || 500);
+        }
+        return mockAnswerLogs.slice(0, limit || 500);
+      }
+    },
+    ExamAttempt: {
+      filter: async (filterObj, sort, limit) => {
+        if (filterObj && filterObj.created_by) {
+          return mockExamAttempts.filter(a => a.created_by === filterObj.created_by).slice(0, limit || 100);
+        }
+        return mockExamAttempts.slice(0, limit || 100);
+      }
+    }
+  }
+};
+
+// -----------------
 
 const generateRecommendations = (weak = [], medium = [], strong = [], untested = [], goal, avgScore, examType, flk1Date, flk2Date) => {
   const recs = [];

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { User, MockExam, Question } from '@/app/api/entities/route';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -46,7 +46,7 @@ export default function MockQuestionReview() {
     const initialize = async () => {
       setLoading(true);
       try {
-        const currentUser = await User.me();
+        const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
         setUser(currentUser);
         if (currentUser.role === 'admin') {
           await loadMockExams();

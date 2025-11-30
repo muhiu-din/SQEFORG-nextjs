@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -60,7 +60,7 @@ export default function ManualMockCreator() {
     useEffect(() => {
         const initialize = async () => {
             try {
-                const currentUser = await base44.auth.me();
+                const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
                 setUser(currentUser);
             } catch (e) {
                 setUser(null);

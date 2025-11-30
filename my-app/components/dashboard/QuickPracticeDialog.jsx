@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
-import { Question, User } from "@/api/entities";
-import { useNavigate } from "react-router-dom";
+//call api entities here
+import { useRouter } from "next/navigation";
 import { createPageUrl } from "@/utils";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -15,7 +15,7 @@ import _ from 'lodash';
 const ALL_SUBJECTS = ["Business Law & Practice", "Dispute Resolution", "Contract Law", "Tort Law", "The Legal System of England & Wales", "Constitutional & Administrative Law", "Legal Services", "Ethics & Professional Conduct", "Property Practice", "Wills & Administration of Estates", "Solicitors Accounts", "Land Law", "Trusts", "Criminal Law", "Criminal Practice"];
 
 export default function QuickPracticeDialog() {
-    const navigate = useNavigate();
+    const router = useRouter();
     const [open, setOpen] = useState(false);
     // allQuestions is no longer needed here as we don't pre-fetch all questions for filtering
     // const [allQuestions, setAllQuestions] = useState([]); 
@@ -69,7 +69,7 @@ export default function QuickPracticeDialog() {
         // We now check if numQuestions is greater than 0, as we don't have a local maxQuestions.
         if (!subject || numQuestions <= 0) return; 
         const url = createPageUrl(`QuestionBank?startSession=true&subject=${encodeURIComponent(subject)}&numQuestions=${numQuestions}&difficulty=${difficulty}&feedbackMode=instant`);
-        navigate(url);
+        router.push(url);
         setOpen(false);
     };
 

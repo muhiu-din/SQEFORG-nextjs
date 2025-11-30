@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Sparkles, Loader2, CheckCircle2, Lock, AlertCircle, Gavel, Shield, Pencil } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import Link from 'next/link';
-import { createPageUrl } from '@/utils';
+import { createPageUrl } from '@/utils'; // Ensure this util exists, or remove if causing error
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
@@ -34,22 +33,6 @@ const ALL_SUBJECTS = [
   "Ethics & Professional Conduct"
 ];
 
-const questionSchema = {
-    type: "object",
-    properties: {
-        question_text: { type: "string" },
-        option_a: { type: "string" },
-        option_b: { type: "string" },
-        option_c: { type: "string" },
-        option_d: { type: "string" },
-        option_e: { type: "string" },
-        correct_answer: { type: "string", enum: ["A", "B", "C", "D", "E"] },
-        explanation: { type: "string" },
-        angoff_score: { type: "number" }
-    },
-    required: ["question_text", "option_a", "option_b", "option_c", "option_d", "option_e", "correct_answer", "explanation", "angoff_score"]
-};
-
 // Simple hash function for duplicate detection
 const hashString = (str) => {
     let hash = 0;
@@ -62,8 +45,9 @@ const hashString = (str) => {
 };
 
 export default function AdminBLLGenerator() {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    // MOCKED: Default to admin user so the UI renders
+    const [user, setUser] = useState({ role: 'admin', name: 'Dev Admin' });
+    const [loading, setLoading] = useState(false); // Set to false to show UI immediately
     const [isGenerating, setIsGenerating] = useState(false);
     const [generatedQuestions, setGeneratedQuestions] = useState([]);
     const [error, setError] = useState(null);
@@ -76,8 +60,8 @@ export default function AdminBLLGenerator() {
     const [numToGenerate, setNumToGenerate] = useState(10);
     const [progressMessage, setProgressMessage] = useState("");
     const [batchId, setBatchId] = useState("");
-    const [activeTab, setActiveTab] = useState("ai"); // 'ai' or 'manual'
-    const [aiCredits, setAiCredits] = useState({ available: 10000, used: 0 });
+    const [activeTab, setActiveTab] = useState("ai"); 
+    const [aiCredits, setAiCredits] = useState({ available: 10000, used: 150 });
     
     // Manual entry state
     const [manualQuestion, setManualQuestion] = useState({
@@ -93,26 +77,11 @@ export default function AdminBLLGenerator() {
     });
 
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const currentUser = await base44.auth.me();
-                setUser(currentUser);
-                
-                // Load AI credits
-                if (currentUser.role === 'admin') {
-                    const logs = await base44.entities.AICreditLog.list();
-                    const totalUsed = logs.reduce((sum, log) => {
-                        const credits = log.credits_added || 0;
-                        return credits < 0 ? sum + Math.abs(credits) : sum;
-                    }, 0);
-                    setAiCredits({ available: 10000, used: totalUsed });
-                }
-            } catch (e) {
-                setUser(null);
-            }
+        // MOCKED: Simulate fetching user info
+        setTimeout(() => {
             setLoading(false);
-        };
-        fetchUser();
+            // This is where your Boss will eventually add the real API call
+        }, 500);
     }, []);
 
     const handleGenerate = async () => {
@@ -135,43 +104,29 @@ export default function AdminBLLGenerator() {
             setProgressMessage(`Generating Black Letter Law question ${i + 1} of ${numToGenerate}...`);
             
             try {
-                const prompt = `You are an expert in UK law and SQE Black Letter Law questions. Generate a high-quality, scenario-based multiple-choice question for the SQE exam.
+                // --- BACKEND REMOVED: SIMULATING AI GENERATION ---
+                // Wait 1 second to simulate AI thinking
+                await new Promise(resolve => setTimeout(resolve, 800));
 
-CRITICAL REQUIREMENTS:
-1. Create a realistic legal scenario with specific facts
-2. The question MUST test pure legal knowledge (statutes, case law, legal principles)
-3. ALL 5 OPTIONS (A-E) MUST BE SIMILAR IN STRUCTURE, LENGTH, AND PLAUSIBILITY
-   - Each option should be a complete, professional legal conclusion or statement
-   - All options must sound equally correct at first glance
-   - Avoid obvious wrong answers like "None of the above" or clearly incorrect statements
-   - Make each distractor based on common legal misconceptions or related principles
-4. SINGLE BEST ANSWER FORMAT:
-   - Only ONE option is the correct/best answer
-   - Other 4 options should be plausible but incorrect for specific legal reasons
-   - Each wrong answer should represent a realistic mistake a student might make
-5. NO plagiarism - create original scenarios and facts
-6. Include case names or statutory references where appropriate
-7. The explanation must cite relevant law (cases/statutes) and explain why each wrong answer is incorrect
-
-Subject: ${subject}
-Difficulty: ${difficulty}
-${topicFocus ? `Specific topic focus: ${topicFocus}` : ''}
-Target Angoff score: ${targetAngoff}
-
-Generate question ${i + 1} with unique facts. Ensure it's different from any previous questions in this batch.`;
-
-                const response = await base44.integrations.Core.InvokeLLM({ 
-                    prompt: prompt, 
-                    response_json_schema: questionSchema 
-                });
+                // MOCK RESPONSE
+                const response = {
+                    question_text: `[MOCK GENERATED] Scenario regarding ${subject} focusing on ${topicFocus || 'general principles'} (Question ${i+1})`,
+                    option_a: "The contract is voidable due to misrepresentation.",
+                    option_b: "The contract is void ab initio.",
+                    option_c: "The contract is valid and binding.",
+                    option_d: "The contract is unenforceable due to lack of consideration.",
+                    option_e: "The contract is illegal on grounds of public policy.",
+                    correct_answer: "A",
+                    explanation: "This is a mock explanation. In a real scenario, this would cite specific case law relevant to the generated scenario.",
+                    angoff_score: targetAngoff
+                };
 
                 // Generate hash to check for duplicates
                 const questionHash = hashString(response.question_text);
                 
-                // Check if this hash already exists
-                const existingQuestions = await base44.entities.BlackLetterQuestion.filter({
-                    question_hash: questionHash
-                });
+                // --- BACKEND REMOVED: SKIP DUPLICATE CHECK ---
+                // Simulating no duplicates found for now
+                const existingQuestions = []; 
 
                 if (existingQuestions && existingQuestions.length > 0) {
                     duplicates++;
@@ -188,9 +143,12 @@ Generate question ${i + 1} with unique facts. Ensure it's different from any pre
                     generation_batch: newBatchId
                 };
 
-                const createdQuestion = await base44.entities.BlackLetterQuestion.create(newQuestionData);
+                // --- BACKEND REMOVED: SIMULATE DB CREATE ---
+                const createdQuestion = { ...newQuestionData, id: Date.now() + i };
+                
                 newQuestions.push(createdQuestion);
-                setGeneratedQuestions([...newQuestions]);
+                // Update state immediately to show progress
+                setGeneratedQuestions(prev => [...prev, createdQuestion]);
 
             } catch (err) {
                 console.error(`Error generating question ${i + 1}:`, err);
@@ -222,26 +180,23 @@ Generate question ${i + 1} with unique facts. Ensure it's different from any pre
         try {
             const questionHash = hashString(manualQuestion.question_text);
             
-            // Check for duplicates
-            const existingQuestions = await base44.entities.BlackLetterQuestion.filter({
-                question_hash: questionHash
-            });
-
-            if (existingQuestions && existingQuestions.length > 0) {
-                setError("This question already exists in the database (duplicate detected)");
-                setIsGenerating(false);
-                return;
-            }
+            // --- BACKEND REMOVED: SIMULATE DB CHECK ---
+            // await base44.entities.BlackLetterQuestion.filter...
 
             const questionData = {
                 ...manualQuestion,
-                subject, // Use the shared subject state
-                difficulty, // Use the shared difficulty state
+                subject, 
+                difficulty,
                 question_hash: questionHash,
                 generation_batch: `manual_${Date.now()}`
             };
 
-            const createdQuestion = await base44.entities.BlackLetterQuestion.create(questionData);
+            // --- BACKEND REMOVED: SIMULATE DB CREATE ---
+            // const createdQuestion = await base44.entities.BlackLetterQuestion.create(questionData);
+            
+            // Mock created object
+            const createdQuestion = { ...questionData, id: Date.now() };
+
             setGeneratedQuestions([createdQuestion]);
             
             // Reset form
@@ -275,6 +230,7 @@ Generate question ${i + 1} with unique facts. Ensure it's different from any pre
         );
     }
 
+    // AUTH CHECK
     if (user?.role !== 'admin') {
         return (
             <div className="min-h-screen bg-slate-50 flex items-center justify-center p-10">
@@ -282,7 +238,7 @@ Generate question ${i + 1} with unique facts. Ensure it's different from any pre
                     <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
                     <h1 className="text-2xl font-bold">Admin Access Required</h1>
                     <p className="text-slate-600 mt-2">This tool is for administrators only.</p>
-                    <Link href={createPageUrl("Dashboard")}>
+                    <Link href={"#"}>
                         <Button variant="outline" className="mt-6">Return to Dashboard</Button>
                     </Link>
                 </Card>
@@ -299,7 +255,7 @@ Generate question ${i + 1} with unique facts. Ensure it's different from any pre
                     </div>
                     <h1 className="text-4xl font-bold text-slate-900 mb-3">Black Letter Law Generator</h1>
                     <p className="text-slate-600 text-lg">Generate EQUAL amounts per subject for fair distribution</p>
-                    <div className="flex gap-2 mt-2">
+                    <div className="flex gap-2 mt-2 justify-center">
                         <Badge className="bg-blue-600">Duplicate Detection Enabled</Badge>
                         <Badge className="bg-green-600">⚖️ Equal Distribution</Badge>
                     </div>
@@ -679,7 +635,7 @@ Generate question ${i + 1} with unique facts. Ensure it's different from any pre
                             <Alert className="bg-green-50 border-green-200">
                                 <CheckCircle2 className="h-4 w-4 text-green-600" />
                                 <AlertDescription className="text-green-800">
-                                    Questions saved to database. Students can now practice them via Black Letter Law Practice.
+                                    Questions generated successfully. Backend integration pending.
                                 </AlertDescription>
                             </Alert>
                         </CardContent>

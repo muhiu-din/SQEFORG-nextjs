@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
-import { base44 } from '@/api/base44Client';
+//call api entities here
 import _ from 'lodash';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -77,7 +77,7 @@ export default function QuestionBank() {
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      const currentUser = await base44.auth.me();
+      const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
       setUser(currentUser);
 
       const allQuestions = await base44.entities.Question.list();

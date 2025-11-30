@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Network, Book, Shield, Gavel, Home, Briefcase, Scale, ScrollText, Building, Users, FileText, DollarSign, Landmark, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { base44 } from '@/api/base44Client';
+//call api entities here
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const MIND_MAP_DATA = {

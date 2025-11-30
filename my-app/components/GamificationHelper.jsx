@@ -1,4 +1,4 @@
-import { base44 } from '@/api/base44Client';
+//call api entities here
 import { BADGES_CATALOG, calculateLevel } from './GamificationWidget';
 
 // Points awarded for different activities

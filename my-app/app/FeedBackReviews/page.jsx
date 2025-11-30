@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Review, User } from '@/api/entities';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -93,7 +93,7 @@ export default function FeedbackReviews() {
     ];
 
     useEffect(() => {
-        User.me().then(setUser).catch(() => setUser(null));
+        const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
         fetchReviews();
     }, []);
 

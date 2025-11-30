@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { ExamAttempt, Question, User, MockExam } from '@/api/entities';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle2, XCircle, ArrowLeft } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';

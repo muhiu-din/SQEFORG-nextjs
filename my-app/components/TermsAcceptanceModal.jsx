@@ -4,7 +4,7 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Shield, AlertTriangle, FileText, Lock } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+//call api entities here
 
 export default function TermsAcceptanceModal({ open, user, onAccept }) {
   const [termsChecked, setTermsChecked] = useState(false);

@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { User, Question, MockExam } from "@/api/entities";
-import { InvokeLLM } from "@/api/integrations";
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,42 +11,48 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createPageUrl } from "@/utils";
-import ReactQuill from 'react-quill';
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false,
+});
+
 import 'react-quill/dist/quill.snow.css';
+
 
 const FLK1_SUBJECTS = ["Business Law & Practice", "Dispute Resolution", "Contract Law", "Tort Law", "The Legal System of England & Wales", "Constitutional & Administrative Law", "Legal Services", "Ethics & Professional Conduct"];
 const FLK2_SUBJECTS = ["Property Practice", "Wills & Administration of Estates", "Solicitors Accounts", "Land Law", "Trusts", "Criminal Law", "Criminal Practice"];
 
 const CreditWorkaround = () => (
-    <Card className="mt-8 bg-amber-50 border-amber-200 shadow-lg">
-        <CardHeader>
-            <CardTitle className="flex items-center gap-3 text-amber-900">
-                <AlertTriangle className="w-6 h-6" />
-                AI Credits Required
-            </CardTitle>
-            <CardDescription className="text-amber-800">
-                This feature requires AI credits to analyze your text automatically. Here is the 100% free workaround.
-            </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4 text-slate-800">
-            <p className="font-bold">You can still create your exam for free in 2 simple steps:</p>
-            <div>
-                <h4 className="font-semibold text-lg">Step 1: Format Your Text (for free)</h4>
-                <p className="mb-2">Go to a free tool like ChatGPT and paste the prompt below, adding your own questions at the end.</p>
-                <div className="p-3 bg-slate-800 text-white rounded-lg text-sm font-mono">
-                    <p>You are a data formatting expert. Take the raw text of the multiple-choice questions I provide and convert it into a single, raw JSON object. Your entire output MUST be only the JSON code. Do not add any other words, titles, or characters like ```json. The JSON must have a top-level key called "questions", which is an array of question objects. Each object must have these keys: "question_text", "option_a", "option_b", "option_c", "option_d", "option_e", "correct_answer", "explanation", "angoff_score". Use an "angoff_score" of 0.65. Here is the text to format: </p>
-                    <p className="mt-2 text-amber-300">[PASTE YOUR TYPED-OUT QUESTIONS HERE]</p>
-                </div>
-            </div>
-            <div>
-                <h4 className="font-semibold text-lg">Step 2: Import the Formatted Text</h4>
-                <p className="mb-2">Copy the JSON output from the AI tool. Then, go to the credit-free importer, paste it into the "From Text" tab, and click import.</p>
-                <Link href={createPageUrl("BulkQuestionImporter")}>
-                    <Button variant="outline" className="bg-white hover:bg-slate-100">Go to Credit-Free Importer</Button>
-                </Link>
-            </div>
-        </CardContent>
-    </Card>
+  <Card className="mt-8 bg-amber-50 border-amber-200 shadow-lg">
+    <CardHeader>
+      <CardTitle className="flex items-center gap-3 text-amber-900">
+        <AlertTriangle className="w-6 h-6" />
+        AI Credits Required
+      </CardTitle>
+      <CardDescription className="text-amber-800">
+        This feature requires AI credits to analyze your text automatically. Here is the 100% free workaround.
+      </CardDescription>
+    </CardHeader>
+    <CardContent className="space-y-4 text-slate-800">
+      <p className="font-bold">You can still create your exam for free in 2 simple steps:</p>
+      <div>
+        <h4 className="font-semibold text-lg">Step 1: Format Your Text (for free)</h4>
+        <p className="mb-2">Go to a free tool like ChatGPT and paste the prompt below, adding your own questions at the end.</p>
+        <div className="p-3 bg-slate-800 text-white rounded-lg text-sm font-mono">
+          <p>You are a data formatting expert. Take the raw text of the multiple-choice questions I provide and convert it into a single, raw JSON object. Your entire output MUST be only the JSON code. Do not add any other words, titles, or characters like ```json. The JSON must have a top-level key called "questions", which is an array of question objects. Each object must have these keys: "question_text", "option_a", "option_b", "option_c", "option_d", "option_e", "correct_answer", "explanation", "angoff_score". Use an "angoff_score" of 0.65. Here is the text to format: </p>
+          <p className="mt-2 text-amber-300">[PASTE YOUR TYPED-OUT QUESTIONS HERE]</p>
+        </div>
+      </div>
+      <div>
+        <h4 className="font-semibold text-lg">Step 2: Import the Formatted Text</h4>
+        <p className="mb-2">Copy the JSON output from the AI tool. Then, go to the credit-free importer, paste it into the "From Text" tab, and click import.</p>
+        <Link href={createPageUrl("BulkQuestionImporter")}>
+          <Button variant="outline" className="bg-white hover:bg-slate-100">Go to Credit-Free Importer</Button>
+        </Link>
+      </div>
+    </CardContent>
+  </Card>
 );
 
 export default function AIGenerateExam() {
@@ -69,7 +74,7 @@ export default function AIGenerateExam() {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const currentUser = await User.me();
+        const currentUser = { name: "Admin User", email: "admin@example.com", role: "admin" };
         setUser(currentUser);
       } catch (e) { setUser(null); }
       setLoadingUser(false);
@@ -85,16 +90,16 @@ export default function AIGenerateExam() {
 
     const plainTextContent = textContent.replace(/(<([^>]+)>)/ig, '');
     if (!title.trim() || !examType.trim() || !plainTextContent.trim()) {
-        setError("Please provide an Exam Title, select an Exam Type, and paste your question text.");
-        setGenerating(false);
-        return;
+      setError("Please provide an Exam Title, select an Exam Type, and paste your question text.");
+      setGenerating(false);
+      return;
     }
-    
+
     let subjectContextPrompt;
     if (examType === "FLK 1") {
-        subjectContextPrompt = `For each question, you MUST assign a "subject" from the following list: ${FLK1_SUBJECTS.join(', ')}.`;
+      subjectContextPrompt = `For each question, you MUST assign a "subject" from the following list: ${FLK1_SUBJECTS.join(', ')}.`;
     } else {
-        subjectContextPrompt = `For each question, you MUST assign a "subject" from the following list: ${FLK2_SUBJECTS.join(', ')}.`;
+      subjectContextPrompt = `For each question, you MUST assign a "subject" from the following list: ${FLK2_SUBJECTS.join(', ')}.`;
     }
 
     const prompt = `You are an expert in creating UK Solicitor Qualifying Exam (SQE) questions. Your primary goal is to extract pre-written multiple-choice questions from the text below. If the text does not contain questions, generate new ones based on the content.
@@ -128,7 +133,7 @@ export default function AIGenerateExam() {
                   option_e: { type: "string" },
                   correct_answer: { type: "string", enum: ["A", "B", "C", "D", "E"] },
                   explanation: { type: "string" },
-                  angoff_score: {type: "number" },
+                  angoff_score: { type: "number" },
                 },
                 required: ["subject", "question_text", "option_a", "option_b", "option_c", "option_d", "option_e", "correct_answer", "explanation", "angoff_score"]
               }
@@ -163,11 +168,11 @@ export default function AIGenerateExam() {
       setGenerating(false);
     }
   };
-  
+
   if (loadingUser) {
     return <div className="p-10 text-center"><Loader2 className="w-8 h-8 animate-spin mx-auto" /></div>;
   }
-  
+
   if (user?.role !== 'admin') {
     return (
       <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-50 p-6 md:p-10 flex items-center justify-center">
@@ -193,46 +198,52 @@ export default function AIGenerateExam() {
         </div>
 
         <Card className="border-none shadow-xl">
-            <CardHeader className="p-8 border-b border-slate-100">
-              <CardTitle className="text-2xl font-bold text-slate-900">Exam Details & Content</CardTitle>
-            </CardHeader>
-            <CardContent className="p-8 space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <Label htmlFor="title">Exam Title *</Label>
-                        <Input id="title" value={title} onChange={e => setTitle(e.target.value)} required className="mt-2 h-12" placeholder="e.g., Complex Wills Mock"/>
-                    </div>
-                    <div>
-                        <Label htmlFor="examType">Exam Type *</Label>
-                        <Select value={examType} onValueChange={setExamType} required>
-                            <SelectTrigger className="mt-2 h-12"><SelectValue /></SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="FLK 1">FLK 1</SelectItem>
-                                <SelectItem value="FLK 2">FLK 2</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                </div>
+          <CardHeader className="p-8 border-b border-slate-100">
+            <CardTitle className="text-2xl font-bold text-slate-900">Exam Details & Content</CardTitle>
+          </CardHeader>
+          <CardContent className="p-8 space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="title">Exam Title *</Label>
+                <Input id="title" value={title} onChange={e => setTitle(e.target.value)} required className="mt-2 h-12" placeholder="e.g., Complex Wills Mock" />
+              </div>
+              <div>
+                <Label htmlFor="examType">Exam Type *</Label>
+                <Select value={examType} onValueChange={setExamType} required>
+                  <SelectTrigger className="mt-2 h-12"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="FLK 1">FLK 1</SelectItem>
+                    <SelectItem value="FLK 2">FLK 2</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
-                <div>
-                    <Label>Paste Your Questions Here *</Label>
-                    <ReactQuill 
-                        theme="snow" 
-                        value={textContent} 
-                        onChange={setTextContent} 
-                        placeholder="Paste your text here. The AI will extract or generate questions, options, and explanations from this content."
-                        className="bg-white h-[300px] mt-2"
-                        style={{ marginBottom: '4rem' }}
-                    />
-                </div>
-              
-              <Button onClick={handleGenerate} disabled={generating} className="w-full bg-slate-900 hover:bg-slate-800 h-14 text-lg">
-                {generating ? <Loader2 className="w-6 h-6 mr-2 animate-spin" /> : <Sparkles className="w-5 h-5 mr-2" />}
-                {generating ? "Analyzing & Generating..." : "Generate Exam"}
-              </Button>
-            </CardContent>
+            <div>
+              <Label>Paste Your Questions Here *</Label>
+
+              {/* <ReactQuill  //Doesnot work in nextjs server components
+    theme="snow"
+    value={textContent}
+    onChange={setTextContent}
+    style={{ height: "200px", marginBottom: "50px" }}
+/> */}
+              <textarea
+                value={textContent}
+                onChange={(e) => setTextContent(e.target.value)}
+                placeholder="Paste Your Questions Here *"
+                className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                style={{ height: "200px", marginBottom: "50px", resize: "vertical" }}
+              ></textarea>
+            </div>
+
+            <Button onClick={handleGenerate} disabled={generating} className="w-full bg-slate-900 hover:bg-slate-800 h-14 text-lg">
+              {generating ? <Loader2 className="w-6 h-6 mr-2 animate-spin" /> : <Sparkles className="w-5 h-5 mr-2" />}
+              {generating ? "Analyzing & Generating..." : "Generate Exam"}
+            </Button>
+          </CardContent>
         </Card>
-        
+
         {error && !showCreditWorkaround && <Alert variant="destructive" className="mt-6"><AlertTriangle className="h-4 w-4" /><AlertDescription>{error}</AlertDescription></Alert>}
         {showCreditWorkaround && <CreditWorkaround />}
         {success && <Alert className="mt-6 bg-green-50 border-green-200"><CheckCircle2 className="h-4 w-4 text-green-600" /><AlertDescription className="text-green-800">Exam generated successfully! Redirecting...</AlertDescription></Alert>}

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/app/api/base44Client/route';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -26,7 +26,7 @@ export default function FlashCardReviewBanks() {
     const loadData = async () => {
         setLoading(true);
         try {
-            const currentUser = await base44.auth.me();
+            const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
             setUser(currentUser);
 
             const userReviews = await base44.entities.FlashCardReview.filter(

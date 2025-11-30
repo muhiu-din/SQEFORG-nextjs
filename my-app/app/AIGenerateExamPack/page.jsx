@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { User, Question, MockExam } from "@/api/entities";
-import { base44 } from "@/api/base44Client";
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -94,7 +93,7 @@ export default function AIGenerateExamPack() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const currentUser = await User.me();
+        const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
         setUser(currentUser);
       } catch (e) {
         setUser(null);

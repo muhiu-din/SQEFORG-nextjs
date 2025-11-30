@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { User, Question, MockExam, UploadedFile } from '@/api/entities';
-import { UploadPrivateFile, CreateFileSignedUrl, ExtractDataFromUploadedFile, InvokeLLM } from '@/api/integrations';
+//call api entities here
+
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Loader2, CheckCircle, XCircle, Info, Lock, FileUp } from 'lucide-react';
@@ -14,7 +14,29 @@ import { useToast } from "@/components/ui/use-toast";
 
 const FLK1_SUBJECTS = ["Business Law & Practice", "Dispute Resolution", "Contract Law", "Tort Law", "The Legal System of England & Wales", "Constitutional & Administrative Law", "Legal Services", "Ethics & Professional Conduct"];
 const FLK2_SUBJECTS = ["Property Practice", "Wills & Administration of Estates", "Solicitors Accounts", "Land Law", "Trusts", "Criminal Law", "Criminal Practice"];
+const User = {
+  me: async () => ({
+    id: "admin-001",
+    name: "Admin User",
+    email: "admin@test.com",
+    role: "admin" // change to "student" to test blocking
+  })
+};
 
+const Question = {
+  bulkCreate: async (questions) => {
+    return questions.map((q, i) => ({
+      ...q,
+      id: `q-${Date.now()}-${i}`
+    }));
+  }
+};
+
+const MockExam = {
+  create: async (exam) => {
+    return { id: `exam-${Date.now()}`, ...exam };
+  }
+};
 export default function AIBulkExamImporter() {
   const { toast } = useToast();
   const [user, setUser] = useState(null);

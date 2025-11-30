@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
-import { RevisionBook, User } from '@/api/entities';
+// call api entities
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -28,7 +27,7 @@ export default function AdminRevisionBookGenerator() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const currentUser = await User.me();
+                const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"};
                 setUser(currentUser);
             } catch (e) {
                 setUser(null);

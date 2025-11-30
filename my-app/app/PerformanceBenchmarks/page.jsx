@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { User, ExamAttempt, Question, UserAnswerLog } from '@/api/entities';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -61,7 +61,7 @@ export default function PerformanceBenchmarks() {
   const loadBenchmarkData = async () => {
     setLoading(true);
     try {
-      const currentUser = await User.me();
+      const currentUser = {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
       setUser(currentUser);
 
       const [allAttempts, allAnswerLogs, allQuestions] = await Promise.all([

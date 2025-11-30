@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { User, Question } from '@/api/entities';
+//call api entities here
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -32,7 +32,7 @@ export default function DuplicateQuestionRemover() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const currentUser = await User.me();
+                const currentUser =  {name: "Admin User", email: "admin@example.com", role: "admin"}; // Mock admin user
                 setUser(currentUser);
             } catch (e) {
                 setUser(null);
