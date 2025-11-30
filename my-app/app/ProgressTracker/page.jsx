@@ -20,11 +20,12 @@ import {
   Flame, Trophy, FileText
 } from 'lucide-react';
 import { format, parseISO, subDays, subMonths, isAfter, isBefore } from 'date-fns';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import Watermark from '../components/Watermark';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import ComparativeBenchmark from '../components/ComparativeBenchmark';
+import next from 'next';
 
 const CHART_COLORS = {
   primary: '#1e293b',
@@ -402,7 +403,7 @@ export default function ProgressTracker() {
             <AlertDescription>
               No exam attempts found for the selected filters. Try adjusting your filters or take some exams to see your progress!
               <div className="mt-4">
-                <Link to={createPageUrl('MockExams')}>
+                <Link href={createPageUrl('MockExams')}>
                   <Button className="bg-slate-900 hover:bg-slate-800">
                     Take a Mock Exam
                   </Button>
@@ -637,7 +638,7 @@ export default function ProgressTracker() {
                             <p className="text-sm text-slate-600">
                               {area.correct}/{area.total} correct • {area.incorrect} to review
                             </p>
-                            <Link to={createPageUrl('QuestionBank') + `?startSession=true&subject=${encodeURIComponent(area.subject)}&numQuestions=20&difficulty=All&feedbackMode=instant`}>
+                            <Link href={createPageUrl('QuestionBank') + `?startSession=true&subject=${encodeURIComponent(area.subject)}&numQuestions=20&difficulty=All&feedbackMode=instant`}>
                               <Button size="sm" className="mt-3 w-full bg-red-600 hover:bg-red-700">
                                 <Target className="w-4 h-4 mr-2" />
                                 Practice This Subject

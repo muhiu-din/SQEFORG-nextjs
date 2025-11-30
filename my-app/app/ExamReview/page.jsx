@@ -5,13 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle2, XCircle, ArrowLeft } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import Watermark from '../components/Watermark';
 import ImprovementSuggestions from '../components/ImprovementSuggestions';
 
 export default function ExamReview() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const urlParams = new URLSearchParams(window.location.search);
   const attemptId = urlParams.get("attemptId");
 
@@ -94,7 +95,7 @@ export default function ExamReview() {
                 <p className="text-slate-600 mb-4">
                     The exam attempt you are looking for could not be found or has no associated questions to review.
                 </p>
-                <Button onClick={() => navigate(createPageUrl("Results"))}>
+                <Button onClick={() => router.push(createPageUrl("Results"))}>
                     Go to Results
                 </Button>
             </CardContent>
@@ -120,7 +121,7 @@ export default function ExamReview() {
       <div className="max-w-4xl mx-auto relative">
         <Watermark user={user} />
         <div className="flex items-center gap-4 mb-4">
-            <Button variant="outline" size="icon" onClick={() => navigate(createPageUrl("Results"))}>
+            <Button variant="outline" size="icon" onClick={() => router.push(createPageUrl("Results"))}>
                 <ArrowLeft className="w-4 h-4" />
             </Button>
             <div>

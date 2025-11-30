@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BookOpen, Loader2, Lock, FileText, ArrowLeft, Gavel, Trash2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -91,7 +91,7 @@ export default function RevisionBooks() {
                         <p className="text-slate-600 mb-8">
                             Access comprehensive, exam-focused revision books for all SQE1 subjects. Upgrade to Ultimate for complete coverage.
                         </p>
-                        <Link to={createPageUrl("Packages")}>
+                        <Link href={createPageUrl("Packages")}>
                             <Button className="bg-amber-400 text-slate-900 hover:bg-amber-500 h-12 px-8 text-lg">
                                 Upgrade to Ultimate
                             </Button>
@@ -250,7 +250,7 @@ export default function RevisionBooks() {
                         <h2 className="text-2xl font-bold text-slate-800 mb-2">Building Your Library</h2>
                         <p className="text-slate-600">Revision books are being created. Check back soon!</p>
                         {user?.role === 'admin' && (
-                            <Link to={createPageUrl("AdminRevisionBookGenerator")}>
+                            <Link href={createPageUrl("AdminRevisionBookGenerator")}>
                                 <Button className="mt-6 bg-slate-900 hover:bg-slate-800">
                                     Create Revision Books
                                 </Button>

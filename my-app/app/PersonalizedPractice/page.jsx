@@ -5,7 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Sparkles, Target, TrendingUp, Loader2, CheckCircle2, XCircle, Lock, AlertCircle, Clock, BookOpen } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import _ from 'lodash';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -19,7 +20,7 @@ const ALL_SUBJECTS = [
 ];
 
 export default function PersonalisedPractice() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [recommendations, setRecommendations] = useState({
@@ -171,7 +172,7 @@ export default function PersonalisedPractice() {
 
   const handleStartSession = (subject) => {
     const url = createPageUrl(`QuestionBank?startSession=true&subject=${encodeURIComponent(subject)}&numQuestions=30&difficulty=medium&feedbackMode=instant`);
-    navigate(url);
+   router.push(url);
   };
 
   if (loading) {
@@ -190,7 +191,7 @@ export default function PersonalisedPractice() {
           <h1 className="text-2xl font-bold mb-2">Pro Feature</h1>
           <p className="text-slate-600 mb-6">Personalised Practice is available for Pro and Ultimate subscribers.</p>
           <Button asChild className="bg-amber-500 hover:bg-amber-600 text-slate-900">
-            <Link to={createPageUrl("Packages")}>Upgrade Plan</Link>
+            <Link href={createPageUrl("Packages")}>Upgrade Plan</Link>
           </Button>
         </Card>
       </div>
@@ -207,7 +208,7 @@ export default function PersonalisedPractice() {
           <h1 className="text-2xl font-bold mb-2">Pro Feature</h1>
           <p className="text-slate-600 mb-6">Personalised Practice is available for Pro and Ultimate subscribers.</p>
           <Button asChild className="bg-amber-500 hover:bg-amber-600 text-slate-900">
-            <Link to={createPageUrl("Packages")}>Upgrade Plan</Link>
+            <Link href={createPageUrl("Packages")}>Upgrade Plan</Link>
           </Button>
         </Card>
       </div>
@@ -240,7 +241,7 @@ export default function PersonalisedPractice() {
                 Great work! Either you haven't practiced enough yet for us to identify areas for improvement, or you're performing consistently well across all subjects.
               </p>
               <Button asChild>
-                <Link to={createPageUrl("QuestionBank")}>Start Practicing</Link>
+                <Link href={createPageUrl("QuestionBank")}>Start Practicing</Link>
               </Button>
             </CardContent>
           </Card>
@@ -411,7 +412,7 @@ export default function PersonalisedPractice() {
                               variant="outline"
                               className="border-purple-300 text-purple-900 hover:bg-purple-50"
                             >
-                              <Link to={createPageUrl(`StudyNotes`)}>
+                              <Link href={createPageUrl(`StudyNotes`)}>
                                 <BookOpen className="w-4 h-4 mr-2" />
                                 Study Notes
                               </Link>

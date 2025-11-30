@@ -4,7 +4,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Post, User } from '@/api/entities';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import { Loader2, PlusCircle, MessageSquare, BookOpen, AlertCircle, ArrowUp, ArrowDown, TrendingUp, Clock, Flame, Sparkles, Brain } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -171,7 +172,7 @@ const PostItem = ({ post, currentUserEmail }) => {
             </div>
             <div className="grow p-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <Link to={createPageUrl(`CommunityForum?category=${encodeURIComponent(post.category)}`)} className="text-xs font-semibold text-slate-700 hover:underline">
+                    <Link href={createPageUrl(`CommunityForum?category=${encodeURIComponent(post.category)}`)} className="text-xs font-semibold text-slate-700 hover:underline">
                         {post.category}
                     </Link>
                     {isQA && (
@@ -182,11 +183,11 @@ const PostItem = ({ post, currentUserEmail }) => {
                     )}
                     <span className="text-xs text-slate-500">• Posted by {post.author_name} • {formatDistanceToNow(new Date(post.created_date), { addSuffix: true })}</span>
                 </div>
-                <Link to={createPageUrl(`PostDetails?id=${post.id}`)} className="block">
+                <Link href={createPageUrl(`PostDetails?id=${post.id}`)} className="block">
                     <h2 className="text-xl font-bold text-slate-800 hover:text-amber-600 transition-colors">{post.title}</h2>
                 </Link>
                 <p className="text-sm text-slate-600 mt-2 line-clamp-2">{post.content}</p>
-                <Link to={createPageUrl(`PostDetails?id=${post.id}`)} className="flex items-center gap-2 mt-3 text-sm font-medium text-slate-600 hover:bg-slate-100 p-2 rounded-md w-fit transition-colors">
+                <Link href={createPageUrl(`PostDetails?id=${post.id}`)} className="flex items-center gap-2 mt-3 text-sm font-medium text-slate-600 hover:bg-slate-100 p-2 rounded-md w-fit transition-colors">
                     <MessageSquare className="w-4 h-4" />
                     <span>{post.answers_count || post.comments?.length || 0} {isQA ? 'Answers' : 'Comments'}</span>
                 </Link>
@@ -200,7 +201,7 @@ export default function CommunityForum() {
     const [filterCategory, setFilterCategory] = useState('All');
     const [sortBy, setSortBy] = useState('Hot'); // 'New', 'Top', or 'Hot'
     const [viewMode, setViewMode] = useState('all'); // 'all', 'discussions', 'qa'
-    const navigate = useNavigate(); // Initialize useNavigate
+    const router = useRouter();
 
     // Check for category filter in URL
     useEffect(() => {
@@ -211,9 +212,9 @@ export default function CommunityForum() {
         } else if (category && category === 'All') { // Also handle 'All' explicitly if present in URL
             setFilterCategory('All');
         } else if (category) { // If category is in URL but not valid, remove it.
-             navigate(createPageUrl(`CommunityForum`));
+             router.push(createPageUrl(`CommunityForum`));
         }
-    }, [navigate]);
+    }, [router]);
     
     // CRITICAL FIX: Use useQuery to handle loading and error states for the user object safely.
     const { data: user, isLoading: isCurrentUserLoading, isError: isUserError } = useQuery({ 
@@ -406,7 +407,7 @@ export default function CommunityForum() {
                         <Select 
                             onValueChange={(val) => {
                                 setFilterCategory(val); // Update local state for immediate feedback
-                                navigate(createPageUrl(`CommunityForum${val === 'All' ? '' : `?category=${encodeURIComponent(val)}`}`));
+                                router.push(createPageUrl(`CommunityForum${val === 'All' ? '' : `?category=${encodeURIComponent(val)}`}`));
                             }} 
                             value={filterCategory} // Control select based on state
                         >

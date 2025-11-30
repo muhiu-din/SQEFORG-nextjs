@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -146,7 +147,7 @@ export default function SimulatorPart({ questions, title, timeLimitMinutes, onFi
   const answeredCount = Object.keys(answers).filter(questionId => answers[questionId] !== undefined).length;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 flex flex-col">
        <div className="sticky top-0 bg-white/80 backdrop-blur-sm border-b border-slate-200 z-20 p-6">
         <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-4">

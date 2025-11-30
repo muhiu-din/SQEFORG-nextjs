@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Loader2, BrainCircuit, Clock, Calendar, CheckCircle2, Play } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 
 // SRS Algorithm (SuperMemo-2 inspired)
@@ -144,7 +144,7 @@ export default function SpacedRepetitionReview() {
             </div>
             <h2 className="text-2xl font-bold text-slate-900 mb-2">Review Session Complete!</h2>
             <p className="text-slate-600 mb-6">You've reviewed {sessionStats.reviewed} questions today.</p>
-            <Link to={createPageUrl("Dashboard")}>
+            <Link href={createPageUrl("Dashboard")}>
                 <Button className="bg-slate-900 text-white">Back to Dashboard</Button>
             </Link>
         </Card>
@@ -161,7 +161,7 @@ export default function SpacedRepetitionReview() {
             </div>
             <h2 className="text-2xl font-bold text-slate-900 mb-2">No Reviews Due</h2>
             <p className="text-slate-600 mb-6">You're all caught up! Check back tomorrow or start a new practice session.</p>
-            <Link to={createPageUrl("BlackLetterLawPractice")}>
+            <Link href={createPageUrl("BlackLetterLawPractice")}>
                 <Button className="bg-slate-900 text-white">Start Practice</Button>
             </Link>
         </Card>

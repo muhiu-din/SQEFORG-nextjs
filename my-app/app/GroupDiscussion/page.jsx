@@ -7,12 +7,13 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, MessageSquare, Send, Loader2 } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import { formatDistanceToNow } from 'date-fns';
 
 export default function GroupDiscussion() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [group, setGroup] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -32,7 +33,7 @@ export default function GroupDiscussion() {
       const groupId = params.get('groupId');
       
       if (!groupId) {
-        navigate(createPageUrl('StudyGroups'));
+        router.push(createPageUrl('StudyGroups'));
         return;
       }
 
@@ -43,7 +44,7 @@ export default function GroupDiscussion() {
       
       if (!fetchedGroup?.member_emails?.includes(currentUser.email)) {
         alert('You must be a member to view this group');
-        navigate(createPageUrl('StudyGroups'));
+        router.push(createPageUrl('StudyGroups'));
         return;
       }
       
@@ -51,7 +52,7 @@ export default function GroupDiscussion() {
     } catch (error) {
       console.error('Failed to load group:', error);
       alert('Failed to load group');
-      navigate(createPageUrl('StudyGroups'));
+      router.push(createPageUrl('StudyGroups'));
     }
     setLoading(false);
   };
@@ -140,7 +141,7 @@ export default function GroupDiscussion() {
     <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-50 p-6 md:p-10">
       <div className="max-w-4xl mx-auto">
         <Button asChild variant="ghost" className="mb-6">
-          <Link to={createPageUrl('StudyGroups')}>
+          <Link href={createPageUrl('StudyGroups')}>
             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Groups
           </Link>
         </Button>

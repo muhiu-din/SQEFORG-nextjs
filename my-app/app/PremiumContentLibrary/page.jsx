@@ -20,7 +20,7 @@ import {
   Eye,
   AlertCircle
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -1062,7 +1062,7 @@ export default function PremiumContentLibrary() {
             </Button>
           ) : (
             <Button asChild variant="outline" className="w-full touch-manipulation" size="sm">
-              <Link to={createPageUrl('Packages')}>
+              <Link href={createPageUrl('Packages')}>
                 <Lock className="w-4 h-4 mr-2" />
                 Upgrade to Access
               </Link>
@@ -1249,7 +1249,7 @@ export default function PremiumContentLibrary() {
                 Get instant access to comprehensive study guides for all FLK1 and FLK2 subjects.
               </p>
               <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto touch-manipulation">
-                <Link to={createPageUrl('Packages')}>
+                <Link href={createPageUrl('Packages')}>
                   View Upgrade Options
                 </Link>
               </Button>
@@ -1266,7 +1266,7 @@ export default function PremiumContentLibrary() {
                 Unlock advanced analysis guides designed for top performers.
               </p>
               <Button asChild size="lg" className="bg-amber-600 hover:bg-amber-700 w-full sm:w-auto touch-manipulation">
-                <Link to={createPageUrl('Packages')}>
+                <Link href={createPageUrl('Packages')}>
                   Upgrade to Ultimate
                 </Link>
               </Button>

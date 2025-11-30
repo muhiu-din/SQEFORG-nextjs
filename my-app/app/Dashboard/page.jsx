@@ -25,7 +25,7 @@ import {
   Lock,
   Brain
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { createPageUrl } from "@/utils";
 import _ from "lodash";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -341,21 +341,21 @@ export default function Dashboard() {
                     </p>
                     <div className="grid md:grid-cols-3 gap-4">
                       <Button asChild className="h-auto py-4 px-6 flex-col items-start bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-200">
-                        <Link to={createPageUrl("QuestionBank")}>
+                        <Link href={createPageUrl("QuestionBank")}>
                           <Target className="w-6 h-6 mb-2 text-blue-600" />
                           <span className="font-bold">Practice Questions</span>
                           <span className="text-xs text-slate-600 mt-1">Start with 30 questions</span>
                         </Link>
                       </Button>
                       <Button asChild className="h-auto py-4 px-6 flex-col items-start bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-200">
-                        <Link to={createPageUrl("MockExams")}>
+                        <Link href={createPageUrl("MockExams")}>
                           <BookOpen className="w-6 h-6 mb-2 text-amber-600" />
                           <span className="font-bold">Full Mock Exam</span>
                           <span className="text-xs text-slate-600 mt-1">90 question timed test</span>
                         </Link>
                       </Button>
                       <Button asChild className="h-auto py-4 px-6 flex-col items-start bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-200">
-                        <Link to={createPageUrl("InteractivePractice")}>
+                        <Link href={createPageUrl("InteractivePractice")}>
                           <Brain className="w-6 h-6 mb-2 text-purple-600" />
                           <span className="font-bold">Interactive Quiz</span>
                           <span className="text-xs text-slate-600 mt-1">Timed with explanations</span>
@@ -445,7 +445,7 @@ export default function Dashboard() {
                         </AlertDescription>
                       </div>
                       <Button asChild variant="outline" size="sm">
-                        <Link to={rec.actionUrl}>
+                        <Link href={rec.actionUrl}>
                           {rec.action}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Link>
@@ -485,7 +485,7 @@ export default function Dashboard() {
                       ))}
                     </div>
                     <Button asChild className="w-full mt-4 bg-red-600 hover:bg-red-700">
-                      <Link to={createPageUrl('PersonalisedPractice')}>
+                      <Link href={createPageUrl('PersonalisedPractice')}>
                         Focus on Weak Areas
                       </Link>
                     </Button>
@@ -537,7 +537,7 @@ export default function Dashboard() {
                   ))}
                 </div>
                 <Button asChild className="bg-amber-600 hover:bg-amber-700">
-                  <Link to={createPageUrl('PersonalizedStudyPath')}>
+                  <Link href={createPageUrl('PersonalizedStudyPath')}>
                     Complete Your Coverage
                   </Link>
                 </Button>
@@ -562,19 +562,19 @@ export default function Dashboard() {
                   Quick Practice
                 </Button>
                 <Button asChild className="h-20 flex-col bg-linear-to-br from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-                  <Link to={createPageUrl("InteractivePractice")}>
+                  <Link href={createPageUrl("InteractivePractice")}>
                     <Brain className="w-6 h-6 mb-2" />
                     Interactive Quiz
                   </Link>
                 </Button>
                 <Button asChild className="h-20 flex-col bg-linear-to-br from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700">
-                  <Link to={createPageUrl("MockExams")}>
+                  <Link href={createPageUrl("MockExams")}>
                     <BookOpen className="w-6 h-6 mb-2" />
                     Mock Exam
                   </Link>
                 </Button>
                 <Button asChild className="h-20 flex-col bg-linear-to-br from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
-                  <Link to={createPageUrl("ProgressTracker")}>
+                  <Link href={createPageUrl("ProgressTracker")}>
                     <BarChart3 className="w-6 h-6 mb-2" />
                     Progress
                   </Link>

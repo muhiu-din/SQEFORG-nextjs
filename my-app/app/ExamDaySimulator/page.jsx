@@ -8,7 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import SimulatorPart from '../components/simulator/SimulatorPart';
 import BreakScreen from '../components/simulator/BreakScreen';
 import SimulatorResults from '../components/simulator/SimulatorResults';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
@@ -263,7 +263,7 @@ export default function ExamDaySimulator() {
                                     {user.role === 'admin' ? (
                                         <span>As an admin, you have unlimited access.</span>
                                     ) : (
-                                        <span>You currently have <strong>{user.simulation_credits || 0} credits</strong>. {user.simulation_credits < 1 && <Link to={createPageUrl("Packages")} className="underline font-semibold">Purchase more credits</Link>}</span>
+                                        <span>You currently have <strong>{user.simulation_credits || 0} credits</strong>. {user.simulation_credits < 1 && <Link href={createPageUrl("Packages")} className="underline font-semibold">Purchase more credits</Link>}</span>
                                     )}
                                 </AlertDescription>
                             </Alert>
@@ -287,7 +287,7 @@ export default function ExamDaySimulator() {
                                     )}
                                 </Button>
                                 <Button asChild variant="outline" className="h-16">
-                                    <Link to={createPageUrl("Dashboard")}>Cancel</Link>
+                                    <Link href={createPageUrl("Dashboard")}>Cancel</Link>
                                 </Button>
                             </div>
                         </CardContent>

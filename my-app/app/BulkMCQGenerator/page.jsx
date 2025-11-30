@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/components/ui/select';
 import { Sparkles, Loader2, CheckCircle2, Lock, AlertCircle, Brain, Shield } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
@@ -543,7 +543,7 @@ Return array of ${questionsInBatch} questions. Ensure EVERY question is scenario
                     <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
                     <h1 className="text-2xl font-bold">Admin Access Required</h1>
                     <p className="text-slate-600 mt-2">This tool is for administrators only.</p>
-                    <Link to={createPageUrl("Dashboard")}>
+                    <Link href={createPageUrl("Dashboard")}>
                         <Button variant="outline" className="mt-6">Return to Dashboard</Button>
                     </Link>
                 </Card>
@@ -828,7 +828,7 @@ Return array of ${questionsInBatch} questions. Ensure EVERY question is scenario
                                 >
                                     Generate Another Subject
                                 </Button>
-                                <Link to={createPageUrl("QuestionBank")} className="flex-1">
+                                <Link href={createPageUrl("QuestionBank")} className="flex-1">
                                     <Button className="w-full bg-purple-600 hover:bg-purple-700">
                                         View Question Bank
                                     </Button>

@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from 'react';
 import { User } from '@/api/entities';
 import { Badge } from '@/components/ui/badge';

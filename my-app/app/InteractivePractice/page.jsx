@@ -24,7 +24,7 @@ import {
   BarChart3
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import {
   Select,
@@ -545,7 +545,7 @@ export default function InteractivePractice() {
                     New Quiz
                   </Button>
                   <Button asChild className="flex-1 bg-purple-600 hover:bg-purple-700">
-                    <Link to={createPageUrl('PerformanceDashboard')}>
+                    <Link href={createPageUrl('PerformanceDashboard')}>
                       <BarChart3 className="w-4 h-4 mr-2" />
                       View All Results
                     </Link>
@@ -908,7 +908,7 @@ export default function InteractivePractice() {
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline" className="w-full">
-                <Link to={createPageUrl('PerformanceDashboard')}>
+                <Link href={createPageUrl('PerformanceDashboard')}>
                   <BarChart3 className="w-4 h-4 mr-2" />
                   View Detailed Performance Analytics
                 </Link>

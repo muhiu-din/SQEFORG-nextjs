@@ -17,7 +17,7 @@ import {
   Music
 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 
 const COMING_SOON_FEATURES = [
@@ -252,7 +252,7 @@ export default function ComingSoon() {
               Found something that could work better? Let us know!
             </p>
             <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
-              <Link to={createPageUrl('FeedbackReviews')}>
+              <Link href={createPageUrl('FeedbackReviews')}>
                 <MessageSquare className="w-4 h-4 mr-2" />
                 Share Your Feedback
               </Link>

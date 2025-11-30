@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Loader2, Lock, CheckCircle2, AlertCircle, Sparkles, FileText } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -682,7 +681,7 @@ WRITING REQUIREMENTS:
                     <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
                     <h1 className="text-2xl font-bold">Admin Only</h1>
                     <p className="text-slate-600 mt-2">This tool is for administrators only.</p>
-                    <Link to={createPageUrl("Dashboard")}>
+                    <Link href={createPageUrl("Dashboard")}>
                         <Button variant="outline" className="mt-6">Return to Dashboard</Button>
                     </Link>
                 </Card>
@@ -759,7 +758,7 @@ WRITING REQUIREMENTS:
                                         </Button>
                                     </div>
                                     
-                                    <Link to={createPageUrl("RevisionBooks")} className="block">
+                                    <Link href={createPageUrl("RevisionBooks")} className="block">
                                         <Button variant="outline" className="w-full">
                                             View Generated Books
                                         </Button>
@@ -769,7 +768,7 @@ WRITING REQUIREMENTS:
                                 <div className="text-center">
                                     <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
                                     <h3 className="text-xl font-bold text-slate-900 mb-4">All Books Generated!</h3>
-                                    <Link to={createPageUrl("RevisionBooks")}>
+                                    <Link href={createPageUrl("RevisionBooks")}>
                                         <Button className="bg-slate-900 hover:bg-slate-800">
                                             View All Books
                                         </Button>
@@ -853,7 +852,7 @@ WRITING REQUIREMENTS:
                                     Successfully processed {generatedBooks.length} books.
                                 </p>
                                 <div className="flex gap-4 justify-center">
-                                    <Link to={createPageUrl("RevisionBooks")}>
+                                    <Link href={createPageUrl("RevisionBooks")}>
                                         <Button className="bg-slate-900 hover:bg-slate-800">
                                             View Revision Books
                                         </Button>

@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -73,7 +74,7 @@ function CreateGroupDialog({ onGroupCreated, currentUser }) {
 }
 
 export default function StudyGroups() {
-    const navigate = useNavigate();
+    const router = useRouter();
     const queryClient = useQueryClient();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -323,7 +324,7 @@ export default function StudyGroups() {
                         {isMember && !isSample ? (
                             <>
                                 <Button
-                                    onClick={() => navigate(createPageUrl(`GroupDiscussion?groupId=${group.id}`))}
+                                    onClick={() => router.push(createPageUrl(`GroupDiscussion?groupId=${group.id}`))}
                                     className="flex-1"
                                 >
                                     <BookOpen className="w-4 h-4 mr-2" />

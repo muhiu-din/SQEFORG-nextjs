@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Lock, Loader2, Upload, File as FileIcon, ClipboardCopy } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { useToast } from "@/components/ui/use-toast"
 
@@ -99,7 +99,7 @@ export default function FileManager() {
           <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold">Access Denied</h1>
           <p className="text-slate-600 mt-2">This page is for administrators only.</p>
-          <Link to={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
+          <Link href={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
         </Card>
       </div>
     );

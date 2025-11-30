@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle2, XCircle, Clock, Zap, Target, TrendingUp, TrendingDown, Minus } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 
 const OFFICIAL_SQE_AVG_SECONDS = 102; // Official SRA/SQE average: 102 seconds per question
@@ -56,7 +56,7 @@ export default function SimulatorResults({
   const totalFlagged = Object.keys(part1FlaggedQuestions).length + Object.keys(part2FlaggedQuestions).length;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-50 p-6 md:p-10">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 p-6 md:p-10">
       <div className="max-w-4xl mx-auto">
         <Card className="border-none shadow-xl mb-8">
           <CardHeader className={`text-center p-10 border-b ${passed ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'}`}>
@@ -212,17 +212,17 @@ export default function SimulatorResults({
 
             <div className="space-y-3">
               <Button asChild className="w-full h-12 bg-slate-900 hover:bg-slate-800">
-                <Link to={createPageUrl(`ExamReview?attemptId=${attempt?.id}`)}>
+                <Link href={createPageUrl(`ExamReview?attemptId=${attempt?.id}`)}>
                   Review All Questions
                 </Link>
               </Button>
               <Button asChild variant="outline" className="w-full h-12">
-                <Link to={createPageUrl("ExamDaySimulator")}>
+                <Link href={createPageUrl("ExamDaySimulator")}>
                   Back to Simulator
                 </Link>
               </Button>
               <Button asChild variant="outline" className="w-full h-12">
-                <Link to={createPageUrl("Dashboard")}>
+                <Link href={createPageUrl("Dashboard")}>
                   Return to Dashboard
                 </Link>
               </Button>

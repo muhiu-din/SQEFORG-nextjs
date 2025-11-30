@@ -14,7 +14,7 @@ import Watermark from '../components/Watermark';
 import ScoreVisualization from '../components/ScoreVisualization';
 import { processSessionRewards } from '../components/GamificationHelper';
 import GamificationToast from '../components/GamificationToast';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import {
   Accordion,
   AccordionContent,
@@ -347,13 +347,13 @@ Format your response as JSON:
                               </p>
                             </div>
                             <div className="flex gap-2">
-                              <Link to={createPageUrl('BlackLetterLawPractice') + `?subject=${encodeURIComponent(subject)}`}>
+                              <Link href={createPageUrl('BlackLetterLawPractice') + `?subject=${encodeURIComponent(subject)}`}>
                                 <Button size="sm" variant="outline" className="text-xs">
                                   <BookOpen className="w-3 h-3 mr-1" />
                                   BLL Practice
                                 </Button>
                               </Link>
-                              <Link to={createPageUrl('QuestionBank') + `?startSession=true&subject=${encodeURIComponent(subject)}&numQuestions=20&difficulty=All&feedbackMode=instant`}>
+                              <Link href={createPageUrl('QuestionBank') + `?startSession=true&subject=${encodeURIComponent(subject)}&numQuestions=20&difficulty=All&feedbackMode=instant`}>
                                 <Button size="sm" className="bg-red-600 hover:bg-red-700 text-xs">
                                   <Target className="w-3 h-3 mr-1" />
                                   Practice Now
@@ -467,7 +467,7 @@ Format your response as JSON:
 
                                 {/* Links to further study */}
                                 <div className="flex gap-2 pt-2">
-                                  <Link to={createPageUrl('BlackLetterLawPractice') + `?subject=${encodeURIComponent(q.subject)}`}>
+                                  <Link href={createPageUrl('BlackLetterLawPractice') + `?subject=${encodeURIComponent(q.subject)}`}>
                                     <Button size="sm" variant="outline">
                                       <BookOpen className="w-3 h-3 mr-1" />
                                       Study {q.subject}

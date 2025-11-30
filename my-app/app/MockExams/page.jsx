@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { MockExam, User, ExamAttempt } from "@/api/entities";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createPageUrl } from "@/utils";
 import { Clock, FileText, Plus, Play, Sparkles, Loader2, Trash2, SlidersHorizontal, Package, Edit, CheckCircle2, AlertTriangle } from "lucide-react"; // Added AlertTriangle import
 import { Badge } from "@/components/ui/badge";
@@ -22,7 +23,7 @@ import CustomMockDialog from '../components/CustomMockDialog';
 import { useToast } from "@/components/ui/use-toast";
 
 export default function MockExams() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { toast } = useToast();
 
   const [user, setUser] = useState(null);
@@ -179,14 +180,14 @@ export default function MockExams() {
           </div>
           {user?.role === 'admin' && (
             <div className="flex gap-2">
-                <Link to={createPageUrl("ManualMockCreator")}>
+                <Link href={createPageUrl("ManualMockCreator")}>
                     <Button variant="outline" className="h-full">
                         <Edit className="w-4 h-4 mr-2" />
                         Create Manual Mock
                     </Button>
                 </Link>
                 <CustomMockDialog />
-                <Link to={createPageUrl("AIGenerateExamPack")}>
+                <Link href={createPageUrl("AIGenerateExamPack")}>
                     <Button className="bg-slate-900 hover:bg-slate-800 gap-2 h-full">
                         <Package className="w-4 h-4" />
                         Generate Exam Pack
@@ -297,7 +298,7 @@ export default function MockExams() {
                                   </div>
                               </div>
                               <Button
-                                  onClick={() => navigate(createPageUrl("TakeExam") + `?examId=${exam.id}`)}
+                                  onClick={() => router.push(createPageUrl("TakeExam") + `?examId=${exam.id}`)}
                                   className={`w-full ${isCompleted ? 'bg-green-600 hover:bg-green-700' : 'bg-slate-900 hover:bg-slate-800'}`}
                               >
                                   <Play className="w-4 h-4 mr-2" />

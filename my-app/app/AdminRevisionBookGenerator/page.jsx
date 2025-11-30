@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, BookOpen, Sparkles, Lock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
@@ -204,7 +204,7 @@ ${customPrompt ? `\n\n# ADDITIONAL CUSTOM INSTRUCTIONS:\n${customPrompt}` : ''}`
                     <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
                     <h1 className="text-2xl font-bold">Admin Only</h1>
                     <p className="text-slate-600 mt-2">This tool is for administrators only.</p>
-                    <Link to={createPageUrl("Dashboard")}>
+                    <Link href={createPageUrl("Dashboard")}>
                         <Button variant="outline" className="mt-6">Return to Dashboard</Button>
                     </Link>
                 </Card>
@@ -314,7 +314,7 @@ ${customPrompt ? `\n\n# ADDITIONAL CUSTOM INSTRUCTIONS:\n${customPrompt}` : ''}`
                                         <Button onClick={handleSave} className="flex-1 bg-green-600 hover:bg-green-700">
                                             Save to Library
                                         </Button>
-                                        <Link to={createPageUrl("RevisionBooks")} className="flex-1">
+                                        <Link href={createPageUrl("RevisionBooks")} className="flex-1">
                                             <Button variant="outline" className="w-full">
                                                 View Library
                                             </Button>

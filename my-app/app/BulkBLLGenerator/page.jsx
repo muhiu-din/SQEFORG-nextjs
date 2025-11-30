@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '@/components/ui/select';
 import { Sparkles, Loader2, CheckCircle2, Lock, AlertCircle, Gavel, Shield } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
@@ -359,7 +359,7 @@ Return an array of ${questionsInBatch} questions with even distribution across a
                     <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
                     <h1 className="text-2xl font-bold">Admin Access Required</h1>
                     <p className="text-slate-600 mt-2">This tool is for administrators only.</p>
-                    <Link to={createPageUrl("Dashboard")}>
+                    <Link href={createPageUrl("Dashboard")}>
                         <Button variant="outline" className="mt-6">Return to Dashboard</Button>
                     </Link>
                 </Card>
@@ -590,7 +590,7 @@ Return an array of ${questionsInBatch} questions with even distribution across a
                                 >
                                     Generate Another FLK
                                 </Button>
-                                <Link to={createPageUrl("BlackLetterLawPractice")} className="flex-1">
+                                <Link href={createPageUrl("BlackLetterLawPractice")} className="flex-1">
                                     <Button className="w-full bg-slate-900 hover:bg-slate-800">
                                         View Practice Page
                                     </Button>

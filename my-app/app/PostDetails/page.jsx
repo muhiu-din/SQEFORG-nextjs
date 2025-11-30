@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,9 +15,9 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Separator } from '@/components/ui/separator';
 
 export default function PostDetails() {
-    const location = useLocation();
+    const searchParams = useSearchParams();
     const queryClient = useQueryClient();
-    const postId = new URLSearchParams(location.search).get('id');
+    const postId = searchParams.get('id');
     const [user, setUser] = useState(null);
     const [answer, setAnswer] = useState('');
 
@@ -308,7 +309,7 @@ export default function PostDetails() {
     return (
         <div className="p-6 md:p-10 bg-slate-50 min-h-screen">
             <div className="max-w-4xl mx-auto">
-                <Link to={createPageUrl('CommunityForum')} className="flex items-center gap-2 text-slate-600 hover:text-slate-900 mb-6">
+                <Link href={createPageUrl('CommunityForum')} className="flex items-center gap-2 text-slate-600 hover:text-slate-900 mb-6">
                     <ArrowLeft className="w-4 h-4" /> Back to Forum
                 </Link>
 

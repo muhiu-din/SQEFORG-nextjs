@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle2, XCircle, Loader2, Lock, AlertCircle, RefreshCw } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
@@ -132,7 +132,7 @@ export default function SubjectReviewTool() {
           <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold">Access Denied</h1>
           <p className="text-slate-600 mt-2">This page is for administrators only.</p>
-          <Link to={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
+          <Link href={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
         </Card>
       </div>
     );

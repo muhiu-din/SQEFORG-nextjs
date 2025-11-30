@@ -9,7 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sparkles, Loader2, CheckCircle2, Lock, Package, AlertCircle, Info } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Link, useNavigate } from "react-router-dom";
+import Link from "next/link";
+import {useRouter} from "next/navigation";
 import { createPageUrl } from "@/utils";
 import { Progress } from "@/components/ui/progress";
 
@@ -72,7 +73,7 @@ Which of the following best describes James's professional position?"
 Return only a JSON object with key "questions" as an array. Each question needs: "question_text" (with full scenario), "option_a", "option_b", "option_c", "option_d", "option_e", "correct_answer" (A-E), "explanation", "angoff_score".`;
 
 export default function AIGenerateExamPack() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -256,7 +257,7 @@ export default function AIGenerateExamPack() {
             <Lock className="w-16 h-16 text-amber-400 mx-auto mb-6" />
             <h1 className="text-3xl font-bold text-slate-900 mb-4">Admin Access Required</h1>
             <p className="text-slate-600 mb-8">This tool is reserved for administrators.</p>
-            <Link to={createPageUrl("Dashboard")}>
+            <Link href={createPageUrl("Dashboard")}>
               <Button variant="outline">Return to Dashboard</Button>
             </Link>
           </Card>

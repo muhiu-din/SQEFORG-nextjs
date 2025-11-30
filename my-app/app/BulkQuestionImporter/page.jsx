@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { FileUp, Loader2, CheckCircle, XCircle, Lock, Info, FileText } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { useToast } from "@/components/ui/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -242,7 +242,7 @@ export default function BulkQuestionImporter() {
           <Lock className="w-16 h-16 text-amber-400 mx-auto mb-6" />
           <h1 className="text-3xl font-bold text-slate-900 mb-4">Admin Access Required</h1>
           <p className="text-slate-600 mb-8">This tool is reserved for administrators.</p>
-          <Link to={createPageUrl("Dashboard")}><Button variant="outline">Return to Dashboard</Button></Link>
+          <Link href={createPageUrl("Dashboard")}><Button variant="outline">Return to Dashboard</Button></Link>
         </Card>
       </div>
     );

@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useCallback, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
 

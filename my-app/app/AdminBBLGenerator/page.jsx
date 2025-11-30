@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sparkles, Loader2, CheckCircle2, Lock, AlertCircle, Gavel, Shield, Pencil } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
@@ -282,7 +282,7 @@ Generate question ${i + 1} with unique facts. Ensure it's different from any pre
                     <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
                     <h1 className="text-2xl font-bold">Admin Access Required</h1>
                     <p className="text-slate-600 mt-2">This tool is for administrators only.</p>
-                    <Link to={createPageUrl("Dashboard")}>
+                    <Link href={createPageUrl("Dashboard")}>
                         <Button variant="outline" className="mt-6">Return to Dashboard</Button>
                     </Link>
                 </Card>

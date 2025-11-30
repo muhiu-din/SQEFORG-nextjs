@@ -8,7 +8,7 @@ import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCircle2, Circle, AlertTriangle, Loader2, Lock, Sparkles, Target, BookText, FileText, Layers, Zap, Save, RotateCcw } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { loadProgress, saveCheckpoint, loadCheckpoint, clearProgress } from '@/components/ProgressSaver';
 
@@ -370,7 +370,7 @@ export default function LaunchChecklist() {
 
                         <div className="flex flex-wrap gap-3">
                           {task.actions.map((action, actionIdx) => (
-                            <Link key={actionIdx} to={createPageUrl(action.url)}>
+                            <Link key={actionIdx} href={createPageUrl(action.url)}>
                               <Button className="gap-2 bg-slate-900 hover:bg-slate-800 h-12 px-6">
                                 <Zap className="w-5 h-5" />
                                 {action.label}
@@ -413,12 +413,12 @@ export default function LaunchChecklist() {
                 All tasks complete. Your platform is ready for students.
               </p>
               <div className="flex justify-center gap-3">
-                <Link to={createPageUrl("Dashboard")}>
+                <Link href={createPageUrl("Dashboard")}>
                   <Button className="bg-green-600 hover:bg-green-700">
                     Go to Dashboard
                   </Button>
                 </Link>
-                <Link to={createPageUrl("QuestionBank")}>
+                <Link href={createPageUrl("QuestionBank")}>
                   <Button variant="outline">
                     View Question Bank
                   </Button>
