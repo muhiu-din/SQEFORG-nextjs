@@ -8,7 +8,7 @@ import { Loader2, Trash2, AlertTriangle, CheckCircle2, Search, Info } from 'luci
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/components/ui/use-toast';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
@@ -213,7 +213,7 @@ export default function DuplicateQuestionRemover() {
                     <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
                     <h1 className="text-2xl font-bold">Admin Access Required</h1>
                     <p className="text-slate-600 mt-2">This page is for administrators only.</p>
-                    <Link to={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
+                    <Link href={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
                 </Card>
             </div>
         );

@@ -7,7 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, TrendingUp, TrendingDown, Users, Target, Clock, Award, AlertCircle, BarChart3, Lock, Sparkles } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import _ from 'lodash';
 
@@ -586,7 +586,7 @@ export default function PerformanceBenchmarks() {
                   )}
                 </ul>
                 <Button asChild className="w-full bg-amber-600 hover:bg-amber-700 text-white">
-                  <Link to={createPageUrl("Packages")}>
+                  <Link href={createPageUrl("Packages")}>
                     <Sparkles className="w-4 h-4 mr-2" />
                     Upgrade Now
                   </Link>

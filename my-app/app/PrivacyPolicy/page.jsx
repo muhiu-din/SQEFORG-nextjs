@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lock, Shield, Eye, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 
 export default function PrivacyPolicy() {
@@ -250,7 +250,7 @@ export default function PrivacyPolicy() {
         </Card>
 
         <div className="mt-8 text-center">
-          <Link to={createPageUrl("Dashboard")}>
+          <Link href={createPageUrl("Dashboard")}>
             <Button className="bg-slate-900 hover:bg-slate-800">
               Back to Dashboard
             </Button>

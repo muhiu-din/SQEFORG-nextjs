@@ -12,7 +12,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import MiniMock from '../components/MiniMock';
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import { createPageUrl } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge"; // Added Badge import
@@ -81,7 +81,7 @@ export default function StudyNotes() {
             <Lock className="w-16 h-16 text-amber-400 mx-auto mb-6" />
             <h1 className="text-3xl font-bold text-slate-900 mb-4">This is a Pro Feature</h1>
             <p className="text-slate-600 mb-8">Access detailed study notes and mini-mocks by upgrading to a Pro or Ultimate plan.</p>
-            <Link to={createPageUrl("Packages")}>
+            <Link href={createPageUrl("Packages")}>
               <Button className="bg-amber-400 hover:bg-amber-500 text-slate-900 h-12 px-8">
                 Upgrade Your Plan
               </Button>
@@ -114,7 +114,7 @@ export default function StudyNotes() {
                     {user?.role === 'admin' ? (
                       <p className="text-sm mt-2">
                         You can create new notes in the{' '}
-                        <Link to={createPageUrl("AdminNoteGenerator")} className="font-semibold text-amber-600 hover:underline">
+                        <Link href={createPageUrl("AdminNoteGenerator")} className="font-semibold text-amber-600 hover:underline">
                           Admin Note Generator
                         </Link>
                         .

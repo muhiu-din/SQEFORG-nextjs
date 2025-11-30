@@ -1,9 +1,9 @@
-
+"use client";
 import React, { useState, useEffect } from 'react';
 import { MockExam } from '@/api/entities';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Package, BookOpen, FileText, CheckCircle, Sparkles, ShieldCheck, Layers, ShieldAlert } from 'lucide-react';
 
@@ -12,7 +12,7 @@ const FLK2_SUBJECTS = ["Property Practice", "Wills & Administration of Estates",
 
 const FeatureListItem = ({ children }) => (
     <li className="flex items-start">
-        <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-1" />
+        <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-1" />
         <span className="text-slate-700">{children}</span>
     </li>
 );
@@ -133,35 +133,35 @@ export default function AccountStatusSummary({ user }) {
                     <h3 className="font-semibold text-slate-800 mb-3">Your Plan: <span className="text-amber-600 font-bold capitalize">{tier}</span></h3>
                     <div className="space-y-4">
                         <div className="flex items-center gap-4 p-3 rounded-lg bg-slate-50">
-                            <BookOpen className="w-5 h-5 text-blue-500 shrink-0" />
+                            <BookOpen className="w-5 h-5 text-blue-500 flex-shrink-0" />
                             <div>
                                 <p className="font-medium text-slate-800">Practice Questions</p>
                                 <p className="text-sm text-slate-600">Access to: {questionAccessTier}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4 p-3 rounded-lg bg-slate-50">
-                            <FileText className="w-5 h-5 text-green-500 shrink-0" />
+                            <FileText className="w-5 h-5 text-green-500 flex-shrink-0" />
                             <div>
                                 <p className="font-medium text-slate-800">Mock Exams</p>
                                 <p className="text-sm text-slate-600">{loadingCounts ? 'Loading...' : `FLK1: ${totalFlk1PapersAvailable} | FLK2: ${totalFlk2PapersAvailable} papers available`}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4 p-3 rounded-lg bg-slate-50">
-                            <Layers className="w-5 h-5 text-purple-500 shrink-0" />
+                            <Layers className="w-5 h-5 text-purple-500 flex-shrink-0" />
                             <div>
                                 <p className="font-medium text-slate-800">Flash Cards</p>
                                 <p className="text-sm text-slate-600">Access to: {flashCardAccess}</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-4 p-3 rounded-lg bg-slate-50">
-                            <ShieldAlert className="w-5 h-5 text-red-500 shrink-0 mt-1" />
+                            <ShieldAlert className="w-5 h-5 text-red-500 flex-shrink-0 mt-1" />
                             <div>
                                 <p className="font-medium text-slate-800">Exam Day Simulator</p>
                                 {sim_credits === 0 ? (
                                     <div className="mt-2">
                                         <p className="text-sm text-slate-600 mb-2">Full-day timed exam experience. Purchase separately.</p>
                                         <Button asChild size="sm" className="bg-amber-500 hover:bg-amber-600 text-slate-900">
-                                            <Link to={createPageUrl("Packages")}>Purchase Simulator Credits</Link>
+                                            <Link href={createPageUrl("Packages")}>Purchase Simulator Credits</Link>
                                         </Button>
                                     </div>
                                 ) : (
@@ -183,7 +183,7 @@ export default function AccountStatusSummary({ user }) {
                     </ul>
                      {tier === 'starter' && (
                         <Button asChild className="w-full mt-6 bg-amber-500 hover:bg-amber-600 text-slate-900 gap-2">
-                             <Link to={createPageUrl("Packages")}>
+                             <Link href={createPageUrl("Packages")}>
                                 <Sparkles className="w-4 h-4"/>
                                 Upgrade Plan for Full Access
                             </Link>

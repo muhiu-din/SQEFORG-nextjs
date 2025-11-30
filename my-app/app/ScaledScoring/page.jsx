@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Scale, Target, TrendingUp, Info } from 'lucide-react';
 import ScoreVisualization from '../components/ScoreVisualization';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 
 export default function ScaledScoring() {
@@ -90,7 +90,7 @@ export default function ScaledScoring() {
             <h2 className="text-2xl font-bold text-slate-800 mb-4">Ready to test your knowledge?</h2>
             <p className="text-slate-600 mb-6">Take a mock exam now to see your scaled score in action.</p>
             <Button asChild className="h-12 px-8 text-lg bg-slate-900 hover:bg-slate-800">
-                <Link to={createPageUrl("MockExams")}>Take a Mock Exam</Link>
+                <Link href={createPageUrl("MockExams")}>Take a Mock Exam</Link>
             </Button>
           </div>
         </div>

@@ -12,7 +12,7 @@ import { Server, Loader2, AlertTriangle, CheckCircle, Lock } from 'lucide-react'
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 
 const FLK1_SUBJECTS = ["Business Law & Practice", "Dispute Resolution", "Contract Law", "Tort Law", "The Legal System of England & Wales", "Constitutional & Administrative Law", "Legal Services", "Ethics & Professional Conduct"];
@@ -163,7 +163,7 @@ export default function BulkMockGenerator() {
           <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold">Access Denied</h1>
           <p className="text-slate-600 mt-2">This page is for administrators only.</p>
-          <Link to={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
+          <Link href={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
         </Card>
       </div>
     );

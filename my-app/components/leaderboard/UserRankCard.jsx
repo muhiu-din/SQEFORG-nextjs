@@ -18,10 +18,10 @@ const UserRankCard = ({ rank, name, averageScore, attemptsCount, points, level, 
 
     if (type === 'accuracy') {
         return (
-            <Card className="mb-8 border-none shadow-lg bg-linear-to-r from-slate-800 to-slate-900 text-white">
+            <Card className="mb-8 border-none shadow-lg bg-gradient-to-r from-slate-800 to-slate-900 text-white">
                 <CardContent className="p-6 flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                        <div className="shrink-0">
+                        <div className="flex-shrink-0">
                             <p className="text-xs text-amber-300 uppercase font-bold tracking-wider">Your Rank</p>
                             <p className="text-5xl font-bold">#{rank + 1}</p>
                         </div>
@@ -49,10 +49,10 @@ const UserRankCard = ({ rank, name, averageScore, attemptsCount, points, level, 
 
     // Points type
     return (
-        <Card className="mb-8 border-none shadow-lg bg-linear-to-r from-purple-600 to-purple-700 text-white">
+        <Card className="mb-8 border-none shadow-lg bg-gradient-to-r from-purple-600 to-purple-700 text-white">
             <CardContent className="p-6 flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                    <div className="shrink-0">
+                    <div className="flex-shrink-0">
                         <p className="text-xs text-purple-200 uppercase font-bold tracking-wider">Your Rank</p>
                         <p className="text-5xl font-bold">#{rank + 1}</p>
                     </div>

@@ -16,7 +16,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { createPageUrl } from "@/utils";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import Link from 'next/link';
+import { useSearchParams,useRouter } from "next/navigation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ScoreVisualization from '../components/ScoreVisualization';
@@ -47,8 +48,8 @@ const ALL_SUBJECTS = [
 ];
 
 export default function QuestionBank() {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -127,7 +128,7 @@ export default function QuestionBank() {
   }, [loadData]);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(searchParams.toString());
     if (params.get('startSession') === 'true') {
       const config = {
         numQuestions: parseInt(params.get('numQuestions')) || 30,
@@ -138,7 +139,7 @@ export default function QuestionBank() {
       setSessionConfig(config);
       setTimeout(() => startSession(config), 500);
     }
-  }, [location.search, questions]);
+  }, [searchParams, questions]);
 
   const startSession = (config = sessionConfig) => {
     let pool = [...questions]; // 'questions' array already contains only 'Hard' questions
@@ -229,7 +230,7 @@ export default function QuestionBank() {
   const handleEndSession = () => {
     setInSession(false);
     setCompletedSession(false);
-    navigate(createPageUrl('QuestionBank'));
+    router.push(createPageUrl('QuestionBank'));
   };
 
   if (loading) {
@@ -248,7 +249,7 @@ export default function QuestionBank() {
           <AlertCircle className="w-12 h-12 text-amber-400 mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-2">Subscription Required</h1>
           <p className="text-slate-600 mb-6">Access the Question Bank with any subscription plan.</p>
-          <Link to={createPageUrl("Packages")}>
+          <Link href={createPageUrl("Packages")}>
             <Button className="bg-amber-400 hover:bg-amber-500 text-slate-900">View Plans</Button>
           </Link>
         </Card>

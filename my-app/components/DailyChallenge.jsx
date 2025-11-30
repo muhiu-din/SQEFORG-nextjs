@@ -1,4 +1,4 @@
-
+"use client";
 import React, { useState, useEffect, useMemo } from 'react';
 import { Question, DailyChallengeCompletion, User } from '@/api/entities';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";

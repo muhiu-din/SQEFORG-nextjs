@@ -9,7 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sparkles, Loader2, CheckCircle2, Lock, Files, Info, AlertTriangle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Link, useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { createPageUrl } from "@/utils";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -41,7 +42,7 @@ const CreditWorkaround = () => (
             <div>
                 <h4 className="font-semibold text-lg">Step 2: Import the Formatted Text</h4>
                 <p className="mb-2">Copy the JSON output from the AI tool. Then, go to the credit-free importer, paste it into the "From Text" tab, and click import.</p>
-                <Link to={createPageUrl("BulkQuestionImporter")}>
+                <Link href={createPageUrl("BulkQuestionImporter")}>
                     <Button variant="outline" className="bg-white hover:bg-slate-100">Go to Credit-Free Importer</Button>
                 </Link>
             </div>
@@ -50,7 +51,7 @@ const CreditWorkaround = () => (
 );
 
 export default function AIGenerateExam() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
 
@@ -147,7 +148,7 @@ export default function AIGenerateExam() {
       await MockExam.create({ title, exam_type: examType, time_limit_minutes: 90, question_ids: questionIds, description: "Generated from pasted text." });
 
       setSuccess(true);
-      setTimeout(() => navigate(createPageUrl("MockExams")), 2000);
+      setTimeout(() => router.push(createPageUrl("MockExams")), 2000);
 
     } catch (err) {
       console.error(err);
@@ -174,7 +175,7 @@ export default function AIGenerateExam() {
           <Lock className="w-16 h-16 text-amber-400 mx-auto mb-6" />
           <h1 className="text-3xl font-bold text-slate-900 mb-4">Admin Access Required</h1>
           <p className="text-slate-600 mb-8">This tool is reserved for administrators.</p>
-          <Link to={createPageUrl("Dashboard")}><Button variant="outline">Return to Dashboard</Button></Link>
+          <Link href={createPageUrl("Dashboard")}><Button variant="outline">Return to Dashboard</Button></Link>
         </Card>
       </div>
     );

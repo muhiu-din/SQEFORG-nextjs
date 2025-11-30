@@ -1,4 +1,4 @@
-
+"use client";
 import React, { useState, useEffect, useMemo } from "react";
 import { Question, User } from "@/api/entities";
 import { useNavigate } from "react-router-dom";

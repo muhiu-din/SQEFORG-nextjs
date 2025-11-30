@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Trophy, Target, Zap, Flame, Award, TrendingUp } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
 
@@ -122,7 +122,7 @@ export default function GamificationWidget({ user, compact = false }) {
 
     if (compact) {
         return (
-            <div className="flex items-center gap-4 p-4 bg-linear-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-200">
+            <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-200">
                 <div className="flex items-center gap-2">
                     <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold">
                         {level}
@@ -139,7 +139,7 @@ export default function GamificationWidget({ user, compact = false }) {
                     </div>
                 )}
                 <Button asChild variant="ghost" size="sm" className="ml-auto">
-                    <Link to={createPageUrl("ProgressTracker")}>
+                    <Link href={createPageUrl("ProgressTracker")}>
                         <TrendingUp className="w-4 h-4" />
                     </Link>
                 </Button>
@@ -148,7 +148,7 @@ export default function GamificationWidget({ user, compact = false }) {
     }
 
     return (
-        <Card className="border-none shadow-lg bg-linear-to-br from-purple-50 to-blue-50 mb-8">
+        <Card className="border-none shadow-lg bg-gradient-to-br from-purple-50 to-blue-50 mb-8">
             <CardHeader className="border-b border-purple-100">
                 <CardTitle className="flex items-center justify-between">
                     <span className="flex items-center gap-2">
@@ -156,7 +156,7 @@ export default function GamificationWidget({ user, compact = false }) {
                         Your Progress
                     </span>
                     <Button asChild size="sm" variant="outline">
-                        <Link to={createPageUrl("ProgressTracker")}>View All</Link>
+                        <Link href={createPageUrl("ProgressTracker")}>View All</Link>
                     </Button>
                 </CardTitle>
             </CardHeader>
@@ -165,7 +165,7 @@ export default function GamificationWidget({ user, compact = false }) {
                 <div>
                     <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-full bg-linear-to-br from-purple-600 to-purple-700 flex items-center justify-center text-white font-bold text-xl">
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center text-white font-bold text-xl">
                                 {level}
                             </div>
                             <div>

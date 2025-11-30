@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import { Lock, Loader2, Edit, Save, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 
 // CANONICAL SUBJECT LIST - matches Question entity exactly
@@ -120,7 +120,7 @@ export default function AdminQuestionEditor() {
           <Lock className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold">Access Denied</h1>
           <p className="text-slate-600 mt-2">This page is for administrators only.</p>
-          <Link to={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
+          <Link href={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
         </Card>
       </div>
     );

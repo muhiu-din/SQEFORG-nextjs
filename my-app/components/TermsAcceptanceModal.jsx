@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -50,7 +51,7 @@ export default function TermsAcceptanceModal({ open, user, onAccept }) {
         onInteractOutside={(e) => e.preventDefault()}
         onEscapeKeyDown={(e) => e.preventDefault()}
       >
-        <div className="p-6 pb-4 border-b bg-white shrink-0">
+        <div className="p-6 pb-4 border-b bg-white flex-shrink-0">
           <div className="flex items-center gap-3 mb-2">
             <Shield className="w-8 h-8 text-slate-700" />
             <h2 className="text-2xl font-bold text-slate-900">Welcome to SQEForge</h2>
@@ -151,7 +152,7 @@ export default function TermsAcceptanceModal({ open, user, onAccept }) {
         </div>
 
         {/* Acceptance Checkboxes - Fixed at bottom */}
-        <div className="border-t bg-white p-6 space-y-4 shrink-0">
+        <div className="border-t bg-white p-6 space-y-4 flex-shrink-0">
           <div className="bg-slate-100 p-4 rounded-lg mb-4">
             <p className="font-bold text-slate-900 mb-2">✓ Required Actions:</p>
             <p className="text-sm text-slate-700">Tick all 3 checkboxes below to accept and continue</p>
@@ -162,7 +163,7 @@ export default function TermsAcceptanceModal({ open, user, onAccept }) {
               id="terms" 
               checked={termsChecked} 
               onCheckedChange={setTermsChecked}
-              className="mt-1 shrink-0"
+              className="mt-1 flex-shrink-0"
             />
             <label htmlFor="terms" className="text-sm text-slate-900 cursor-pointer leading-tight">
               <strong>1. I accept the Terms and Conditions</strong> - including intellectual property rights, prohibited activities, and refund policy
@@ -174,7 +175,7 @@ export default function TermsAcceptanceModal({ open, user, onAccept }) {
               id="privacy" 
               checked={privacyChecked} 
               onCheckedChange={setPrivacyChecked}
-              className="mt-1 shrink-0"
+              className="mt-1 flex-shrink-0"
             />
             <label htmlFor="privacy" className="text-sm text-slate-900 cursor-pointer leading-tight">
               <strong>2. I accept the Privacy Policy</strong> - I understand how my data will be collected, used, and protected
@@ -186,7 +187,7 @@ export default function TermsAcceptanceModal({ open, user, onAccept }) {
               id="anti-share" 
               checked={antiShareChecked} 
               onCheckedChange={setAntiShareChecked}
-              className="mt-1 shrink-0"
+              className="mt-1 flex-shrink-0"
             />
             <label htmlFor="anti-share" className="text-sm text-red-900 cursor-pointer leading-tight font-medium">
               <strong>3. I will NOT share content</strong> - I understand that sharing, distributing, or copying any content will result in immediate permanent account termination with no refund eligibility

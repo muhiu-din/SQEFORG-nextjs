@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { base44 } from "@/api/base44Client";
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -22,8 +23,8 @@ import {
 } from "@/components/ui/accordion";
 
 export default function CustomMockSession() {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [user, setUser] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,7 +39,7 @@ export default function CustomMockSession() {
   const [gamificationRewards, setGamificationRewards] = useState(null);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(searchParams.toString());
     const questionIds = params.get('questions')?.split(',') || [];
     const timeLimit = parseInt(params.get('timeLimit')) || 0;
     const title = params.get('title') || 'Custom Practice';
@@ -66,7 +67,7 @@ export default function CustomMockSession() {
     };
 
     loadData();
-  }, [location.search]);
+  }, [searchParams.toString()]);
 
   useEffect(() => {
     if (!isTimed || timeRemaining === null || timeRemaining <= 0 || isFinished) return;
@@ -192,7 +193,7 @@ export default function CustomMockSession() {
           <p className="text-slate-600 mb-6">
             Custom mock creation is only available to administrators.
           </p>
-          <Link to={createPageUrl('MockExams')}>
+          <Link href={createPageUrl('MockExams')}>
             <Button className="bg-slate-900">View Available Mocks</Button>
           </Link>
         </Card>
@@ -215,7 +216,7 @@ export default function CustomMockSession() {
           <AlertCircle className="w-12 h-12 text-amber-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold mb-2">No Questions Found</h2>
           <p className="text-slate-600 mb-6">Unable to load questions for this session.</p>
-          <Button onClick={() => navigate(createPageUrl('Dashboard'))}>
+          <Button onClick={() => router.push(createPageUrl('Dashboard'))}>
             Return to Dashboard
           </Button>
         </Card>
@@ -367,14 +368,14 @@ export default function CustomMockSession() {
 
                 <div className="flex gap-4">
                   <Button
-                    onClick={() => navigate(createPageUrl('Dashboard'))}
+                    onClick={() => router.push(createPageUrl('Dashboard'))}
                     variant="outline"
                     className="flex-1"
                   >
                     Back to Dashboard
                   </Button>
                   <Button
-                    onClick={() => navigate(createPageUrl('PersonalisedPractice'))}
+                    onClick={() => router.push(createPageUrl('PersonalisedPractice'))}
                     className="flex-1 bg-amber-500 hover:bg-amber-600 text-slate-900"
                   >
                     Practice Weak Areas

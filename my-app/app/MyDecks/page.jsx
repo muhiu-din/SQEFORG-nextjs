@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Layers, Plus, Trash2, Edit, Play, Download, Upload, Loader2, Share2, Lock, Unlock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { format } from 'date-fns';
 
@@ -287,7 +287,7 @@ export default function MyDecks() {
                 Create Deck
               </Button>
               <Button asChild variant="outline" className="gap-2">
-                <Link to={createPageUrl("QuestionBank")}>
+                <Link href={createPageUrl("QuestionBank")}>
                   <Play className="w-4 h-4" />
                   Practice Questions
                 </Link>
@@ -336,7 +336,7 @@ export default function MyDecks() {
                       className="flex-1 bg-purple-600 hover:bg-purple-700"
                       disabled={!deck.flashcard_ids || deck.flashcard_ids.length === 0}
                     >
-                      <Link to={createPageUrl(`FlashCards?deckId=${deck.id}`)}>
+                      <Link href={createPageUrl(`FlashCards?deckId=${deck.id}`)}>
                         <Play className="w-4 h-4 mr-1" />
                         Study
                       </Link>
@@ -377,19 +377,19 @@ export default function MyDecks() {
           <CardContent className="p-6">
             <div className="grid md:grid-cols-3 gap-4">
               <Button asChild variant="outline" className="h-20 flex-col">
-                <Link to={createPageUrl("FlashCards")}>
+                <Link href={createPageUrl("FlashCards")}>
                   <Layers className="w-6 h-6 mb-2" />
                   Browse All Flashcards
                 </Link>
               </Button>
               <Button asChild variant="outline" className="h-20 flex-col">
-                <Link to={createPageUrl("QuestionBank")}>
+                <Link href={createPageUrl("QuestionBank")}>
                   <Plus className="w-6 h-6 mb-2" />
                   Create from Questions
                 </Link>
               </Button>
               <Button asChild variant="outline" className="h-20 flex-col">
-                <Link to={createPageUrl("FlashCardProgress")}>
+                <Link href={createPageUrl("FlashCardProgress")}>
                   <Share2 className="w-6 h-6 mb-2" />
                   View Progress
                 </Link>

@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useNavigate, Link } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import { Edit, Loader2, CheckCircle, Lock, Plus, Trash2, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -28,7 +29,7 @@ const ALL_SUBJECTS = [
 ];
 
 export default function ManualMockCreator() {
-    const navigate = useNavigate();
+    const router = useRouter();
     const [user, setUser] = useState(null);
     const [loadingUser, setLoadingUser] = useState(true);
 
@@ -136,7 +137,7 @@ export default function ManualMockCreator() {
             });
             
             setSuccess(true);
-            setTimeout(() => navigate(createPageUrl('MockExams')), 2000);
+            setTimeout(() => router.push(createPageUrl('MockExams')), 2000);
         } catch (err) {
             console.error("Failed to create mock exam:", err);
             setError(err.message || "An unknown error occurred.");
@@ -156,7 +157,7 @@ export default function ManualMockCreator() {
                     <Lock className="w-12 h-12 text-amber-500 mx-auto mb-4" />
                     <h1 className="text-2xl font-bold text-slate-900">Access Denied</h1>
                     <p className="text-slate-600 mt-2">This tool is for administrators only.</p>
-                    <Link to={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
+                    <Link href={createPageUrl("Dashboard")}><Button variant="outline" className="mt-6">Return to Dashboard</Button></Link>
                 </Card>
             </div>
         );

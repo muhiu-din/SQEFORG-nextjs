@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Lightbulb, BookOpen, CheckCircle2 } from 'lucide-react';
 
@@ -88,7 +88,7 @@ const ImprovementSuggestions = ({ attempt, questions, answers }) => {
                             <p className="text-sm text-slate-500 mb-3">{count} incorrect answers in this area.</p>
                             <p className="text-slate-700 mb-4">{suggestions[subject] || suggestions.default}</p>
                             <Button asChild size="sm" variant="outline">
-                                <Link to={createPageUrl(`QuestionBank?startSession=true&subject=${encodeURIComponent(subject)}&numQuestions=10&difficulty=All&feedbackMode=instant`)}>
+                                <Link href={createPageUrl(`QuestionBank?startSession=true&subject=${encodeURIComponent(subject)}&numQuestions=10&difficulty=All&feedbackMode=instant`)}>
                                     <BookOpen className="w-4 h-4 mr-2" />
                                     Practice This Subject
                                 </Link>

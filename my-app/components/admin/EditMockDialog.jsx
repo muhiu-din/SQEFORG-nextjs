@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { MockExam } from '@/api/entities';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";

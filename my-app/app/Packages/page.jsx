@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Check, Sparkles, Crown, Zap, Star, Trophy, Gavel, Shield, BookOpen, Target, AlertTriangle, Lock } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 
 const subscriptionPlans = [

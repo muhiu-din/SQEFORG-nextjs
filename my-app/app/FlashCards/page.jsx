@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Layers, Loader2, ChevronLeft, ChevronRight, Lock, AlertCircle, ThumbsUp, Meh, ThumbsDown, BarChart3, CheckCircle2, XCircle, BookOpen, Target, Calendar } from 'lucide-react';
 import _ from 'lodash';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -49,7 +50,7 @@ const Flashcard = ({ front, back, isFlipped, onFlip }) => {
 };
 
 export default function FlashCards() {
-    const location = useLocation();
+    const searchParams = useSearchParams();
     const [user, setUser] = useState(null);
     const [loadingUser, setLoadingUser] = useState(true);
     const [subject, setSubject] = useState('');
@@ -93,7 +94,7 @@ export default function FlashCards() {
                 setAvailableDecks(decks);
 
                 // Check URL parameters for deck
-                const params = new URLSearchParams(location.search);
+                const params = new URLSearchParams(searchParams.toString());
                 const deckId = params.get('deckId');
                 if (deckId) {
                     setSelectedDeckId(deckId);
@@ -112,7 +113,7 @@ export default function FlashCards() {
             setLoadingUser(false);
         };
         fetchUser();
-    }, [location.search]);
+    }, [searchParams]);
 
     // Calculate next review date using SM-2 algorithm
     const calculateNextReview = (quality, previousReviews) => {
@@ -372,7 +373,7 @@ export default function FlashCards() {
                         <Lock className="w-16 h-16 text-amber-400 mx-auto mb-6" />
                         <h1 className="text-3xl font-bold text-slate-900 mb-4">Flash Cards Available</h1>
                         <p className="text-slate-600 mb-8">Flash Cards are available on all plans including Starter (200 per topic).</p>
-                        <Link to={createPageUrl("Packages")}>
+                        <Link href={createPageUrl("Packages")}>
                             <Button className="bg-amber-400 text-slate-900 hover:bg-amber-500 h-12 px-8 text-lg">
                                 View Plans
                             </Button>
@@ -433,13 +434,13 @@ export default function FlashCards() {
                                 Choose New Topic
                             </Button>
                             <Button asChild variant="outline" className="gap-2">
-                                <Link to={createPageUrl("MyDecks")}>
+                                <Link href={createPageUrl("MyDecks")}>
                                     <Layers className="w-4 h-4" />
                                     My Decks
                                 </Link>
                             </Button>
                             <Button asChild className="bg-purple-600 hover:bg-purple-700 gap-2">
-                                <Link to={createPageUrl("FlashCardProgress")}>
+                                <Link href={createPageUrl("FlashCardProgress")}>
                                     <BarChart3 className="w-4 h-4" />
                                     View Progress
                                 </Link>
@@ -469,13 +470,13 @@ export default function FlashCards() {
                         </div>
                         <div className="flex gap-2">
                             <Button asChild variant="outline" size="sm" className="gap-2">
-                                <Link to={createPageUrl("FlashCardProgress")}>
+                                <Link href={createPageUrl("FlashCardProgress")}>
                                     <BarChart3 className="w-4 h-4" />
                                     Progress
                                 </Link>
                             </Button>
                             <Button asChild variant="outline" size="sm" className="gap-2">
-                                <Link to={createPageUrl("MyDecks")}>
+                                <Link href={createPageUrl("MyDecks")}>
                                     <Layers className="w-4 h-4" />
                                     My Decks
                                 </Link>
@@ -634,7 +635,7 @@ export default function FlashCards() {
 
                         <div className="flex justify-between items-center mb-4">
                             <Button asChild variant="link" className="gap-2">
-                                <Link to={createPageUrl("MyDecks")}>
+                                <Link href={createPageUrl("MyDecks")}>
                                     <Layers className="w-4 h-4" />
                                     Manage Decks
                                 </Link>

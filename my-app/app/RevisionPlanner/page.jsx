@@ -4,7 +4,7 @@ import { User } from '@/api/entities';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CalendarCheck, Lock, CheckCircle2, Circle, BookOpen, Target, PenSquare } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from '@/components/ui/checkbox';
@@ -340,7 +340,7 @@ export default function RevisionPlanner() {
                         <Lock className="w-16 h-16 text-amber-400 mx-auto mb-6" />
                         <h1 className="text-3xl font-bold text-slate-900 mb-4">Content Locked</h1>
                         <p className="text-slate-600 mb-8">The Revision Planner is a premium feature available on Pro and Ultimate plans.</p>
-                        <Link to={createPageUrl("Packages")}>
+                        <Link href={createPageUrl("Packages")}>
                             <Button className="bg-amber-400 text-slate-900 hover:bg-amber-500 h-12 px-8 text-lg">
                                 Upgrade Your Plan
                             </Button>

@@ -1,7 +1,7 @@
-
+"use client";
 import React, { useState, useEffect } from 'react';
 import { User } from '@/api/entities';
-import { base44 } from '@/api/base44Client';
+// import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

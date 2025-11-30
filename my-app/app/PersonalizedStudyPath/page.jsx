@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, Target, Calendar, TrendingUp, BookOpen, Zap, Lock, CheckCircle2, AlertCircle, AlertTriangle, Clock, ArrowRight, Flame } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { createPageUrl } from '@/utils';
 import _ from 'lodash';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -106,7 +107,7 @@ const calculateWeakAreaPlan = (weakAreas, daysUntilExam) => {
 };
 
 export default function PersonalisedStudyPath() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [analyzing, setAnalyzing] = useState(false);
@@ -742,13 +743,13 @@ export default function PersonalisedStudyPath() {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <Link to={createPageUrl(`QuestionBank?startSession=true&subject=${encodeURIComponent(area.subject)}&numQuestions=30&difficulty=medium&feedbackMode=instant`)}>
+                        <Link href={createPageUrl(`QuestionBank?startSession=true&subject=${encodeURIComponent(area.subject)}&numQuestions=30&difficulty=medium&feedbackMode=instant`)}>
                           <Button size="sm" className="bg-red-600 hover:bg-red-700">
                             <ArrowRight className="w-4 h-4 mr-1" />
                             Practice Now (30 Qs)
                           </Button>
                         </Link>
-                        <Link to={createPageUrl(`StudyNotes`)}>
+                        <Link href={createPageUrl(`StudyNotes`)}>
                           <Button size="sm" variant="outline">
                             <BookOpen className="w-4 h-4 mr-1" />
                             Review Notes
@@ -842,7 +843,7 @@ export default function PersonalisedStudyPath() {
                           {rec.action}
                         </Button>
                       ) : (
-                        <Link to={rec.actionUrl}>
+                        <Link href={rec.actionUrl}>
                           <Button size="sm">{rec.action}</Button>
                         </Link>
                       )}

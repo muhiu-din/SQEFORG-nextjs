@@ -8,7 +8,7 @@ import { Sparkles, Loader2, CheckCircle, XCircle, Info, Lock, FileUp } from 'luc
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import { useToast } from "@/components/ui/use-toast";
 
@@ -258,7 +258,7 @@ ${chunk}
                     <Lock className="w-16 h-16 text-amber-400 mx-auto mb-6" />
                     <h1 className="text-3xl font-bold text-slate-900 mb-4">Admin Access Required</h1>
                     <p className="text-slate-600 mb-8">This tool is reserved for administrators.</p>
-                     <Link to={createPageUrl("Dashboard")}>
+                     <Link href={createPageUrl("Dashboard")}>
                         <Button variant="outline">
                             Return to Dashboard
                         </Button>
